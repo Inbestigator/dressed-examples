@@ -9,7 +9,7 @@ export const config: CommandConfig = {
 
 export default async function greet(interaction: CommandInteraction) {
   await interaction.reply({
-    content: `Hey there, ${interaction.user.global_name}! Cool server!`,
+    content: `Hey there, ${interaction.user.global_name}!`,
     ephemeral: true,
   });
 }
