@@ -25,19 +25,6 @@ export const config: CommandConfig = {
 };
 
 export default async function counter(interaction: CommandInteraction) {
-  let userId;
-
-  if ("member" in interaction && interaction.member) {
-    userId = interaction.member.user.id;
-  } else if ("user" in interaction && interaction.user) {
-    userId = interaction.user.id;
-  }
-
-  if (!userId) {
-    await interaction.reply("I'm not sure who you are.");
-    return;
-  }
-
   await interaction.deferReply({
     ephemeral: true,
   });
@@ -54,11 +41,25 @@ export default async function counter(interaction: CommandInteraction) {
     return;
   }
 
-  await kv.atomic().set(["trivia", userId], data.results[0]).commit();
+  await kv.atomic().set(["trivia", interaction.user.id], data.results[0])
+    .commit();
 
   const answers = data.results[0].incorrect_answers.concat(
     data.results[0].correct_answer,
   );
+
+  deduplicate(answers);
+
+  function deduplicate(array: string[]) {
+    const seen = new Set();
+    return array.filter((value) => {
+      if (seen.has(value)) {
+        return false;
+      }
+      seen.add(value);
+      return true;
+    });
+  }
 
   const buttons = answers
     .sort(() => Math.random() - 0.5)
