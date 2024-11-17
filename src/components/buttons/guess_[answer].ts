@@ -4,7 +4,7 @@ import {
 } from "@inbestigator/discord-http";
 const kv = await Deno.openKv();
 
-export default async function resetCounter(
+export default async function guess(
   interaction: MessageComponentInteraction,
   { answer }: { answer: string },
 ) {
