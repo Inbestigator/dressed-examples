@@ -69,34 +69,27 @@ export default async function sweep(
   });
 }
 
-function getMineCount(minesPos: number[], x: number, y: number) {
+export function getMineCount(minesPos: number[], x: number, y: number) {
   const size = 5;
   const pos = x * size + y;
 
   if (minesPos.includes(pos)) {
     return -1;
   }
+  let mineCount = 0;
 
-  const directions = [
-    [-1, -1],
-    [-1, 0],
-    [-1, 1],
-    [0, -1],
-    [0, 1],
-    [1, -1],
-    [1, 0],
-    [1, 1],
-  ];
-
-  return directions
-    .map(([dx, dy]) => {
+  for (let dx = -1; dx <= 1; dx++) {
+    for (let dy = -1; dy <= 1; dy++) {
       const nx = x + dx;
       const ny = y + dy;
-
+      if (nx < 0 || nx >= size || ny < 0 || ny >= size) continue;
       const neighborPos = nx * size + ny;
+
       if (minesPos.includes(neighborPos)) {
-        return true;
+        mineCount++;
       }
-    })
-    .filter(Boolean).length;
+    }
+  }
+
+  return mineCount;
 }

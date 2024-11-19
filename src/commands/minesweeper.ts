@@ -4,6 +4,7 @@ import {
   type CommandConfig,
   type CommandInteraction,
 } from "@inbestigator/discord-http";
+import { getMineCount } from "../components/buttons/sweep_[x]_[y].ts";
 
 const kv = await Deno.openKv();
 
@@ -41,6 +42,7 @@ export default async function minesweeper(interaction: CommandInteraction) {
   const mines = generateMines(difficulty);
 
   await kv.atomic().set(["sweeper", interaction.user.id], mines).commit();
+  let revealedNum = 0;
 
   const actionRows = Array(5)
     .fill(0)
@@ -48,12 +50,26 @@ export default async function minesweeper(interaction: CommandInteraction) {
       ActionRow(
         ...Array(5)
           .fill(0)
-          .map((_col, x) =>
-            Button({
+          .map((_col, x) => {
+            if (
+              Math.random() < 0.2 &&
+              revealedNum < (difficulty === "easy" ? 2 : 1) &&
+              getMineCount(mines, x, y) !== -1
+            ) {
+              revealedNum++;
+              return Button({
+                label: getMineCount(mines, x, y).toString(),
+                style: "Secondary",
+                disabled: true,
+                custom_id: `sweep_${x}_${y}`,
+              });
+            }
+
+            return Button({
               emoji: { name: "❔" },
               custom_id: `sweep_${x}_${y}`,
-            })
-          ),
+            });
+          }),
       )
     );
 
