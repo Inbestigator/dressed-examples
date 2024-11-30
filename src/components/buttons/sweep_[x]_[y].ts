@@ -41,12 +41,17 @@ export default async function sweep(
     }));
 
     await interaction.update({
-      components: updatedRows ?? [],
+      components: updatedRows,
     });
     return;
   }
 
-  const updatedRows = interaction.message.components?.map((r, i) => {
+  let numCovered = -1;
+
+  let updatedRows = interaction.message.components?.map((r, i) => {
+    r.components.forEach((b) => {
+      if (!b.disabled) numCovered++;
+    });
     if (i !== Number(y)) return r;
 
     return {
@@ -63,6 +68,24 @@ export default async function sweep(
       }),
     };
   });
+
+  if (numCovered === minesPos.length) {
+    updatedRows = interaction.message.components?.map((r, i) => ({
+      ...r,
+      components: r.components.map((b, j) => {
+        if (b.type === 2 && b.style === 2) return b;
+        const mines = getMineCount(minesPos, j, i);
+
+        return Button({
+          label: mines !== -1 ? mines.toString() : undefined,
+          emoji: mines === -1 ? { name: "💣" } : undefined,
+          disabled: true,
+          style: mines === -1 ? "Success" : "Secondary",
+          custom_id: `sweep_${j}_${i}`,
+        });
+      }),
+    }));
+  }
 
   await interaction.update({
     components: updatedRows,
