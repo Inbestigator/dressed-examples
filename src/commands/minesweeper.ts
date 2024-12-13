@@ -28,16 +28,7 @@ export default async function minesweeper(interaction: CommandInteraction) {
     ephemeral: true,
   });
 
-  let difficulty = "medium";
-
-  if ("options" in interaction.data && interaction.data.options) {
-    const difficultyOption = interaction.data.options.find(
-      (option) => option.name === "difficulty",
-    );
-    if (difficultyOption && difficultyOption.type === 3) {
-      difficulty = difficultyOption.value;
-    }
-  }
+  const difficulty = interaction.getOption("difficulty")?.string() ?? "medium";
 
   const mines = generateMines(difficulty);
 
