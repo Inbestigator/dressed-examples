@@ -3,3 +3,4 @@ deno.lock
 bot.gen.ts
 pnpm-lock.yaml
 node_modules
+.DS_Store

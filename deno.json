@@ -5,6 +5,6 @@
     "start": "deno run -A --unstable-kv ./bot.gen.ts"
   },
   "imports": {
-    "@inbestigator/discord-http": "jsr:@inbestigator/discord-http@^0.5.3"
+    "@inbestigator/discord-http": "jsr:@inbestigator/discord-http@^0.8.4"
   }
 }
