@@ -1,6 +1,7 @@
 {
   "scripts": {
     "dev": "pnpm build && pnpm start",
+    "register": "pnpm build -r && pnpm start",
     "build": "pnpm tsx ./build.ts",
     "start": "pnpm tsx ./bot.gen.ts"
   },

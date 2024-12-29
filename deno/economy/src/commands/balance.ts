@@ -3,7 +3,7 @@ import db, { getUser } from "../db.ts";
 import { UserItem } from "../types.ts";
 
 export const config: CommandConfig = {
-  description: "View your balance",
+  description: "View your balance and items",
 };
 
 export default function balance(interaction: CommandInteraction) {

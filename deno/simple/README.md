@@ -1,11 +1,37 @@
+# Simple Bot
+
 This is a simple example bot made with
 [Dressed](https://jsr.io/@dressed/dressed).
+
+## Commands
+
+- `/counter`: Increments a counter.
+- `/greet`: Returns a greeting.
+- `/minesweeper`: Play a game of minesweeper.
+- `/trivia`: Gives a random trivia question.
+
+## Setup
+
+1. Clone the project:
+   ```sh
+   deno run -A jsr:@dressed/cmd create my-bot deno/economy
+   ```
+
+2. Install dependencies:
+   ```sh
+   deno install
+   ```
+
+3. Register the commands:
+   ```sh
+   deno task register
+   ```
 
 ## Getting Started
 
 First, run the development bot:
 
-```bash
+```sh
 deno task dev
 ```
 
@@ -15,17 +41,17 @@ system
 
 If you aren't using VSCode, Cloudflared is a good cli option.
 
-```bash
+```sh
 deno run -A npm:cloudflared tunnel --url=localhost:8000
 ```
 
-You can try editing your bot by modifying `src/commands/greet.ts`.
+You can try editing your bot by modifying `src/commands/shop.ts`.
 
 ## Deploying
 
 When you're ready, you can deploy the bot with Deno deploy:
 
-```bash
+```sh
 deno task build
 deployctl deploy --entrypoint=bot.gen.ts
 ```

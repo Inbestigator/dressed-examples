@@ -1,14 +1,28 @@
+# Simple (non-Deno) Bot
+
 This is a version of the simple example bot made with
 [Dressed](https://jsr.io/@inbestigator/dressed) that is compatible with Node,
 Bun, and Deno.
+
+## Commands
+
+- `/counter`: Increments a counter.
+- `/greet`: Returns a greeting.
+- `/trivia`: Gives a random trivia question.
 
 ## Getting Started
 
 First, build the bot:
 
-```bash
+```sh
 pnpm install
-pnpm build
+pnpm register
+```
+
+Then start the bot in development mode:
+
+```sh
+pnpm dev
 ```
 
 The custom `build.ts` script _should_ automatically fix the `bot.gen.ts` output
@@ -26,7 +40,7 @@ You can try editing your bot by modifying `src/commands/greet.ts`.
 
 When you're ready, you can try to deploy the bot with Deno deploy:
 
-```bash
+```sh
 pnpm build
 deployctl deploy --entrypoint=bot.gen.ts
 ```
