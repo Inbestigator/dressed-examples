@@ -1,4 +1,4 @@
-import { MessageComponentInteraction } from "@inbestigator/discord-http";
+import { MessageComponentInteraction } from "@dressed/dressed";
 import { showCount } from "../../commands/counter.ts";
 const kv = await Deno.openKv();
 

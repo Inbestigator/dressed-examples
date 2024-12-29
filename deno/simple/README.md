@@ -1,8 +1,5 @@
 This is a simple example bot made with
-[Discord-http](https://jsr.io/@inbestigator/discord-http).
-
-If you're using Node, or another non-Deno runtime, I'd recommend using
-[the Node-compatible variant](https://github.com/Inbestigator/discord-http-example/tree/node)
+[Dressed](https://jsr.io/@dressed/dressed).
 
 ## Getting Started
 
@@ -34,5 +31,5 @@ deployctl deploy --entrypoint=bot.gen.ts
 ```
 
 You can check out
-[the GitHub repository](https://github.com/inbestigator/discord-http) - your
-feedback and contributions are welcome!
+[the GitHub repository](https://github.com/inbestigator/dressed) - your feedback
+and contributions are welcome!

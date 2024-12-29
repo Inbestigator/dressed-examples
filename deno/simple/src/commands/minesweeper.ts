@@ -3,7 +3,7 @@ import {
   Button,
   type CommandConfig,
   type CommandInteraction,
-} from "@inbestigator/discord-http";
+} from "@dressed/dressed";
 import { getMineCount } from "../components/buttons/sweep_[x]_[y].ts";
 
 const kv = await Deno.openKv();

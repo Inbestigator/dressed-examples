@@ -1,7 +1,4 @@
-import {
-  Button,
-  MessageComponentInteraction,
-} from "@inbestigator/discord-http";
+import { Button, MessageComponentInteraction } from "@dressed/dressed";
 const kv = await Deno.openKv();
 
 export default async function sweep(

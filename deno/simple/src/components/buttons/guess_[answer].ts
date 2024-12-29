@@ -1,7 +1,4 @@
-import {
-  ActionRow,
-  MessageComponentInteraction,
-} from "@inbestigator/discord-http";
+import { ActionRow, MessageComponentInteraction } from "@dressed/dressed";
 const kv = await Deno.openKv();
 
 export default async function guess(

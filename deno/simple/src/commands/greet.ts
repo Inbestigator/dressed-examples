@@ -1,7 +1,4 @@
-import type {
-  CommandConfig,
-  CommandInteraction,
-} from "@inbestigator/discord-http";
+import type { CommandConfig, CommandInteraction } from "@dressed/dressed";
 
 export const config: CommandConfig = {
   description: "Returns a greeting",

@@ -3,8 +3,9 @@ import {
   Button,
   type CommandConfig,
   type CommandInteraction,
-} from "@inbestigator/discord-http";
-const kv = await Deno.openKv();
+} from "@dressed/dressed";
+
+export const triviaData: Record<string, object> = {};
 
 export const config: CommandConfig = {
   description: "Gives a random trivia question",
@@ -18,10 +19,10 @@ export default async function trivia(interaction: CommandInteraction) {
 
   const question = (await res.json())[0];
 
-  await kv.atomic().set(["trivia", interaction.user.id], question).commit();
+  triviaData[interaction.user.id] = question;
 
-  const answers = deduplicate(
-    question.incorrectAnswers.concat(question.correctAnswer),
+  const answers = question.incorrectAnswers.concat(
+    question.correctAnswer,
   );
 
   const buttons = answers
@@ -34,19 +35,7 @@ export default async function trivia(interaction: CommandInteraction) {
     );
 
   await interaction.editReply({
-    content:
-      `## Trivia!\n${question.question.text}\n-# Difficulty: ${question.difficulty}`,
+    content: `## Trivia!\n${question.text}`,
     components: [ActionRow(...buttons)],
-  });
-}
-
-function deduplicate(array: string[]) {
-  const seen = new Set();
-  return array.filter((value) => {
-    if (seen.has(value)) {
-      return false;
-    }
-    seen.add(value);
-    return true;
   });
 }
