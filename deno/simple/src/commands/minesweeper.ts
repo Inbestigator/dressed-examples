@@ -3,6 +3,7 @@ import {
   Button,
   type CommandConfig,
   type CommandInteraction,
+  Option,
 } from "@dressed/dressed";
 import { getMineCount } from "../components/buttons/sweep_[x]_[y].ts";
 
@@ -11,15 +12,15 @@ const kv = await Deno.openKv();
 export const config: CommandConfig = {
   description: "Play a game of minesweeper",
   options: [
-    {
+    Option({
       name: "difficulty",
       description: "The number of mines, leave blank for medium difficulty",
-      type: 3,
+      type: "String",
       choices: [
         { name: "Easy", value: "easy" },
         { name: "Hard", value: "hard" },
       ],
-    },
+    }),
   ],
 };
 
