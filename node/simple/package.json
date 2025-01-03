@@ -6,7 +6,7 @@
     "start": "pnpm tsx ./bot.gen.ts"
   },
   "dependencies": {
-    "@dressed/dressed": "npm:@jsr/dressed__dressed@^1.0.0",
+    "@dressed/dressed": "npm:@jsr/dressed__dressed@^1.0.1",
     "express": "^4.21.1",
     "tsx": "^4.19.2"
   },
