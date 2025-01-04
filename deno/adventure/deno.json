@@ -6,6 +6,6 @@
     "build": "deno run -A jsr:@dressed/cmd build -i"
   },
   "imports": {
-    "@dressed/dressed": "jsr:@dressed/dressed@^1.0.1"
+    "@dressed/dressed": "jsr:@dressed/dressed@^1.0.2"
   }
 }

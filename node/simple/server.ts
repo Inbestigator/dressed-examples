@@ -1,18 +1,15 @@
+import { BotConfig } from "@dressed/dressed";
 import {
-  BotConfig,
-  CommandInteraction,
-  MessageComponentInteraction,
-  ModalSubmitInteraction,
+  CommandHandler,
+  ComponentHandler,
   runInteraction,
   verifySignature,
-} from "@dressed/dressed";
+} from "@dressed/dressed/server";
 import express from "express";
 
 export function createServer(
-  runCommand: (interaction: CommandInteraction) => Promise<void>,
-  runComponent: (
-    interaction: MessageComponentInteraction | ModalSubmitInteraction,
-  ) => Promise<void>,
+  runCommand: CommandHandler,
+  runComponent: ComponentHandler,
   config: BotConfig,
 ) {
   const app = express();
@@ -20,30 +17,27 @@ export function createServer(
   const port = 8000;
 
   app.post(config.endpoint ?? "/", async (req, res) => {
-    const sigReq = {
+    const maskedReq = {
       headers: {
         get: (name: string) => {
           return req.headers[name.toLowerCase()];
         },
       },
       text: () => JSON.stringify(req.body),
+      json: () => req.body,
     };
 
-    if (!(await verifySignature(sigReq as unknown as Request))) {
+    if (!(await verifySignature(maskedReq as unknown as Request))) {
       console.error(" └ Invalid signature");
       res.send(null).status(401);
       return;
     }
 
-    const intReq = {
-      json: () => req.body,
-    };
-
     try {
       const response = await runInteraction(
         runCommand,
         runComponent,
-        intReq as unknown as Request,
+        maskedReq as unknown as Request,
       );
 
       const { status } = response;
