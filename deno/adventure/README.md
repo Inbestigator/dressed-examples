@@ -1,7 +1,8 @@
 # Adventure Bot
 
 This bot is intended as an example of the functionality for
-[Dressed](https://dressed.vercel.app). Users can start a text-based adventure and choose their own branching story.
+[Dressed](https://dressed.vercel.app). Users can start a text-based adventure
+and choose their own branching story.
 
 ## Commands
 

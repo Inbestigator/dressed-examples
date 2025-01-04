@@ -7,6 +7,10 @@ import { story } from "../../story.ts";
 
 const db = await Deno.openKv();
 
+function random(min: number, max: number) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
 export default async function avtButton(
   interaction: MessageComponentInteraction,
   args: { choice: string },
@@ -27,26 +31,51 @@ export default async function avtButton(
   }
   let storyPoint = story[args.choice as keyof typeof story];
 
-  const vars: Deno.KvEntry<unknown>[] = [];
+  const vars: Record<string, string> = {};
   for await (const key of db.list({ prefix: [interaction.user.id] })) {
-    vars.push(key);
+    vars[key.key[1].toString()] = key.value as string;
   }
-  if (storyPoint.when?.length) {
-    storyPoint.when.forEach((condition) => {
+  if (storyPoint.conditions?.length) {
+    for (const condition of storyPoint.conditions) {
       if (
-        Object.entries(condition.must).some(([key, value]) => {
-          return (vars.find((v) => v.key[1] === key)?.value !== value);
+        Object.entries(condition.if).some(([key, value]) => {
+          if (/\d\/\d/.test(key)) {
+            const [min, max] = key.split("/").map(Number);
+            return random(min, max) === parseInt(value);
+          }
+          return (vars[key] !== value);
         })
-      ) return;
-      storyPoint = {
-        ...storyPoint,
-        ...condition.then,
-      };
-    });
+      ) continue;
+      if (condition.join) {
+        storyPoint = {
+          ...storyPoint,
+          ...condition.then,
+          choices: (storyPoint.choices ?? []).concat(
+            condition.then.choices ?? [],
+          ),
+          set: {
+            ...(storyPoint.set ?? {}),
+            ...(condition.then.set ?? {}),
+          },
+        };
+      } else {
+        storyPoint = {
+          ...storyPoint,
+          ...condition.then,
+        };
+      }
+
+      if (condition.stop) break;
+    }
   }
   if (storyPoint.set) {
     for (const key in storyPoint.set) {
-      await db.set([interaction.user.id, key], storyPoint.set[key]);
+      let value = storyPoint.set[key];
+      if (typeof value === "function") {
+        value = value(vars);
+      }
+      await db.set([interaction.user.id, key], value);
+      vars[key] = value;
     }
   }
   if (storyPoint.isWin) {
@@ -56,6 +85,10 @@ export default async function avtButton(
     storyPoint.text = "## Too bad!\n" + storyPoint.text;
     storyPoint.choices = undefined;
   }
+  storyPoint.text = storyPoint.text.replaceAll(
+    /{{ (.+?) }}/g,
+    (_m, k) => (vars[k]),
+  );
   if (!storyPoint.choices) {
     return interaction.reply({
       content: storyPoint.text,
@@ -63,10 +96,7 @@ export default async function avtButton(
     });
   }
   return interaction.reply({
-    content: storyPoint.text.replaceAll(
-      /{{ (.+) }}/g,
-      (match) => (vars.find((v) => v.key[1] === match)?.value as string),
-    ),
+    content: storyPoint.text,
     ephemeral: true,
     components: [
       ActionRow(...storyPoint.choices.map((choice) =>
