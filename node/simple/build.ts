@@ -1,11 +1,11 @@
-import { build } from "@dressed/dressed";
+import { build } from "@dressed/dressed/server";
 import { writeFileSync } from "node:fs";
 
 async function genBot() {
   const outputContent = await build(true, false);
   const nodeServer = outputContent
     .replace(
-      /dressed";\n/,
+      /server";\n/,
       '$&import { createServer } from "./server.ts";\n',
     )
     .replace(
