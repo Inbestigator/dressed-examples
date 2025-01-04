@@ -3,9 +3,9 @@
     "dev": "deno task build && deno run -A --watch --unstable-kv bot.gen.ts",
     "register": "deno task build -r && deno task start",
     "start": "deno run -A --unstable-kv bot.gen.ts",
-    "build": "deno run -A jsr:@dressed/cmd build -i"
+    "build": "deno run -A ../../../dressed-cmd/mod.ts build -i"
   },
   "imports": {
-    "@dressed/dressed": "jsr:@dressed/dressed@^1.0.2"
+    "@dressed/dressed": "jsr:@dressed/dressed@^1.0.3"
   }
 }
