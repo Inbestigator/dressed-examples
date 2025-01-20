@@ -2,7 +2,7 @@
   "scripts": {
     "dev": "pnpm build && pnpm start",
     "register": "pnpm build -r && pnpm start",
-    "build": "pnpx tsx ./cmd.ts build -i",
+    "build": "pnpx tsx ./node_modules/@dressed/cmd/mod.ts build -i",
     "start": "pnpx tsx ./bot.gen.ts"
   },
   "dependencies": {
