@@ -12,7 +12,7 @@ and choose their own branching story.
 
 1. Clone the project:
    ```sh
-   deno run -A jsr:@dressed/cmd create my-bot deno/adventure
+   deno -A jsr:@dressed/cmd create my-bot deno/adventure
    ```
 
 2. Install dependencies:
@@ -40,7 +40,7 @@ system
 If you aren't using VSCode, Cloudflared is a good cli option.
 
 ```sh
-deno run -A npm:cloudflared tunnel --url=localhost:8000
+deno -A npm:cloudflared tunnel --url=localhost:8000
 ```
 
 You can try editing your bot by modifying `src/story.ts`.
