@@ -7,7 +7,7 @@
   },
   "dependencies": {
     "@dressed/cmd": "npm:@jsr/dressed__cmd@^0.1.8",
-    "@dressed/dressed": "npm:@jsr/dressed__dressed@^1.1.0"
+    "@dressed/dressed": "npm:@jsr/dressed__dressed@^1.1.1"
   },
   "devDependencies": {
     "@types/node": "^22.10.2"
