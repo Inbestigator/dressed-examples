@@ -32,7 +32,7 @@ interface StoryNode {
     /** Key/values for what certain variables must be to change the node */
     if: Record<string, string>;
     /** New data that will partially overwrite the node */
-    then: Partial<Omit<StoryNode, "when">>;
+    then: Partial<Omit<StoryNode, "conditions">>;
     /** Join with previous node instead of overwriting */
     join?: boolean;
     /** Stop checking conditions after this one */
