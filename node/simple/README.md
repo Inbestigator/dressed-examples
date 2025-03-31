@@ -1,7 +1,7 @@
 # Simple (non-Deno) Bot
 
 This is a version of the simple example bot made with
-[Dressed](https://jsr.io/@inbestigator/dressed) that is compatible with Node,
+[Dressed](https://dressed.vercel.app) that is compatible with Node,
 Bun, and Deno.
 
 ## Commands

@@ -1,7 +1,7 @@
 # Simple Bot
 
 This is a simple example bot made with
-[Dressed](https://jsr.io/@dressed/dressed).
+[Dressed](https://dressed.vercel.app).
 
 ## Commands
 
