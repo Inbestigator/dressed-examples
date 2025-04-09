@@ -112,7 +112,7 @@ export const story: Record<StoryKey, StoryNode> = {
       "**Your health**: {{ health }} **Enemy health**: {{ enemyHealth }}\nYou chose the Thunderzap attack!",
     set: {
       attack: "thunder",
-      enemyHealth: (v) => (parseInt(v.enemyHealth) - 1).toString(),
+      enemyHealth: (v) => (parseInt(v.enemyHealth ?? "0") - 1).toString(),
     },
     conditions: [
       {
@@ -135,7 +135,7 @@ export const story: Record<StoryKey, StoryNode> = {
       "**Your health**: {{ health }} **Enemy health**: {{ enemyHealth }}\nYou chose the Speedy Strike attack!",
     set: {
       attack: "strike",
-      enemyHealth: (v) => (parseInt(v.enemyHealth) - 2).toString(),
+      enemyHealth: (v) => (parseInt(v.enemyHealth ?? "0") - 2).toString(),
     },
     conditions: [
       {
@@ -167,7 +167,9 @@ export const story: Record<StoryKey, StoryNode> = {
     set: {
       attack: "shock",
       health: (v) =>
-        v.health !== "5" ? (parseInt(v.health) + 1).toString() : v.health,
+        v.health !== "5"
+          ? (parseInt(v.health ?? "0") + 1).toString()
+          : v.health,
     },
     choices: ["defend"],
   },
@@ -180,7 +182,7 @@ export const story: Record<StoryKey, StoryNode> = {
       "**Your health**: {{ health }} **Enemy health**: {{ enemyHealth }}\nYou chose the Flareblast attack!",
     set: {
       attack: "flame",
-      enemyHealth: (v) => (parseInt(v.enemyHealth) - 1).toString(),
+      enemyHealth: (v) => (parseInt(v.enemyHealth ?? "0") - 1).toString(),
     },
     conditions: [
       {
@@ -204,7 +206,9 @@ export const story: Record<StoryKey, StoryNode> = {
     set: {
       attack: "soar",
       health: (v) =>
-        v.health !== "5" ? (parseInt(v.health) + 1).toString() : v.health,
+        v.health !== "5"
+          ? (parseInt(v.health ?? "0") + 1).toString()
+          : v.health,
     },
     choices: ["defend"],
   },
@@ -217,7 +221,7 @@ export const story: Record<StoryKey, StoryNode> = {
       "**Your health**: {{ health }} **Enemy health**: {{ enemyHealth }}\nYou chose the Dragon Swipe attack!",
     set: {
       attack: "swipe",
-      enemyHealth: (v) => (parseInt(v.enemyHealth) - 2).toString(),
+      enemyHealth: (v) => (parseInt(v.enemyHealth ?? "0") - 2).toString(),
     },
     conditions: [
       {
@@ -250,10 +254,10 @@ export const story: Record<StoryKey, StoryNode> = {
       enemyAttack: "Hydrobomb",
       health: (v) => {
         const damage = Math.floor(Math.random() * 2) + 1;
-        if ((parseInt(v.health) - damage) <= 0) {
+        if ((parseInt(v.health ?? "0") - damage) <= 0) {
           return "1";
         }
-        return (parseInt(v.health) - damage).toString();
+        return (parseInt(v.health ?? "0") - damage).toString();
       },
     },
     conditions: [
@@ -313,7 +317,7 @@ export const story: Record<StoryKey, StoryNode> = {
           set: {
             enemyHealth: (v) =>
               v.enemyHealth !== "5"
-                ? (parseInt(v.enemyHealth) + 1).toString()
+                ? (parseInt(v.enemyHealth ?? "0") + 1).toString()
                 : v.enemyHealth,
           },
         },

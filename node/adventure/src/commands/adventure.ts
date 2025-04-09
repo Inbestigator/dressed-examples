@@ -3,7 +3,7 @@ import type {
   CommandInteraction,
   MessageComponentInteraction,
 } from "@dressed/dressed";
-import avtButton from "../components/buttons/avt-[choice]-[vars].ts";
+import avtButton from "@/components/buttons/avt-[choice]-[vars].ts";
 
 export const config: CommandConfig = {
   description: "Start a new adventure!",

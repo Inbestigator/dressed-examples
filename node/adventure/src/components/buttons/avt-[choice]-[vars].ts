@@ -3,7 +3,7 @@ import {
   Button,
   type MessageComponentInteraction,
 } from "@dressed/dressed";
-import { story } from "../../story.ts";
+import { story } from "@/story.ts";
 
 function random(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -26,7 +26,7 @@ export default function avtButton(
         Object.entries(condition.if).some(([key, value]) => {
           if (/\d\/\d/.test(key)) {
             const [min, max] = key.split("/").map(Number);
-            return random(min, max) === parseInt(value);
+            return random(min ?? 0, max ?? 0) === parseInt(value);
           }
           return (vars[key] !== value);
         })
@@ -59,7 +59,9 @@ export default function avtButton(
       if (typeof value === "function") {
         value = value(vars);
       }
-      vars[key] = value;
+      if (value) {
+        vars[key] = value;
+      }
     }
   }
   if (storyPoint.isWin) {
@@ -71,7 +73,7 @@ export default function avtButton(
   }
   storyPoint.text = storyPoint.text.replaceAll(
     /{{ (.+?) }}/g,
-    (_m, k) => (vars[k]),
+    (_, k) => (vars[k] ?? ""),
   );
   if (!storyPoint.choices) {
     return interaction.reply({
