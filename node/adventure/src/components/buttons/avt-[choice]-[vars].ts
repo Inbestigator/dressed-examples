@@ -1,40 +1,25 @@
 import {
   ActionRow,
   Button,
-  MessageComponentInteraction,
+  type MessageComponentInteraction,
 } from "@dressed/dressed";
 import { story } from "../../story.ts";
-
-const db = await Deno.openKv();
 
 function random(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-export default async function avtButton(
+export default function avtButton(
   interaction: MessageComponentInteraction,
-  args: { choice: string },
+  args: { choice: string; vars: string },
 ) {
   if (interaction.message) {
-    await interaction.update({
-      components: [
-        ActionRow(
-          ...interaction.message.components![0].components.map((component) => ({
-            ...component,
-            disabled: true,
-          })),
-        ),
-      ],
-    });
     interaction.reply = interaction
-      .followUp as unknown as typeof interaction.reply;
+      .update as unknown as typeof interaction.reply;
   }
   let storyPoint = story[args.choice as keyof typeof story];
 
-  const vars: Record<string, string> = {};
-  for await (const key of db.list({ prefix: [interaction.user.id] })) {
-    vars[key.key[1].toString()] = key.value as string;
-  }
+  const vars: Record<string, string> = JSON.parse(args.vars);
   if (storyPoint.conditions?.length) {
     for (const condition of storyPoint.conditions) {
       if (
@@ -74,7 +59,6 @@ export default async function avtButton(
       if (typeof value === "function") {
         value = value(vars);
       }
-      await db.set([interaction.user.id, key], value);
       vars[key] = value;
     }
   }
@@ -93,6 +77,7 @@ export default async function avtButton(
     return interaction.reply({
       content: storyPoint.text,
       ephemeral: true,
+      components: [],
     });
   }
   return interaction.reply({
@@ -101,7 +86,7 @@ export default async function avtButton(
     components: [
       ActionRow(...storyPoint.choices.map((choice) =>
         Button({
-          custom_id: `avt-${choice}`,
+          custom_id: `avt-${choice}-${JSON.stringify(vars)}`,
           label: story[choice].choice.text,
           emoji: { name: story[choice].choice.emoji },
         })

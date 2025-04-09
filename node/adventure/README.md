@@ -1,7 +1,8 @@
 # Adventure Bot
 
 This bot is intended as an example of the functionality for
-[Dressed](https://dressed.vercel.app). Users can start a text-based adventure
+[Dressed](https://dressed.vercel.app) that is compatible with Node,
+Bun, and Deno. Users can start a text-based adventure
 and choose their own branching story.
 
 ## Commands
@@ -12,17 +13,17 @@ and choose their own branching story.
 
 1. Clone the project:
    ```sh
-   deno -A jsr:@dressed/cmd create my-bot deno/adventure
+   pnpx deno -A jsr:@dressed/cmd create my-bot node/adventure
    ```
 
 2. Install dependencies:
    ```sh
-   deno install
+   pnpm install
    ```
 
 3. Register the commands:
    ```sh
-   deno task register
+   pnpm register
    ```
 
 ## Getting Started
@@ -30,7 +31,7 @@ and choose their own branching story.
 First, run the development bot:
 
 ```sh
-deno task dev
+pnpm dev
 ```
 
 In order to obtain a public url to use as the interactions endpoint for Discord,
@@ -47,12 +48,7 @@ You can try editing your bot by modifying `src/story.ts`.
 
 ## Deploying
 
-When you're ready, you can deploy the bot with Deno deploy:
-
-```sh
-deno task build
-deployctl deploy --entrypoint=bot.gen.ts
-```
+When you're ready, you can try to deploy the bot on Vercel, for more information on that, see [their documentation](https://vercel.com/docs/deployments).
 
 You can check out
 [the GitHub repository](https://github.com/inbestigator/dressed) - your feedback
