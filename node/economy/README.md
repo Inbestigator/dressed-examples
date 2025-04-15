@@ -4,6 +4,8 @@ This bot is intended as an example of the functionality for
 [Dressed](https://dressed.vercel.app). Users can register, check their balance,
 claim daily rewards, view the shop, and buy items.
 
+This bot has an admin dashboard made using Next.js, where you can moderate user balances and shop items. (incomplete)
+
 ## Commands
 
 - `/register`: Register yourself in the economy system.
@@ -21,12 +23,12 @@ claim daily rewards, view the shop, and buy items.
 
 2. Install dependencies:
    ```sh
-   deno install
+   pnpm install
    ```
 
 3. Register the commands:
    ```sh
-   deno task register
+   pnpm register
    ```
 
 ## Getting Started
@@ -34,7 +36,7 @@ claim daily rewards, view the shop, and buy items.
 First, run the development bot:
 
 ```sh
-deno task dev
+pnpm dev
 ```
 
 In order to obtain a public url to use as the interactions endpoint for Discord,
@@ -44,19 +46,14 @@ system
 If you aren't using VSCode, Cloudflared is a good cli option.
 
 ```sh
-deno -A npm:cloudflared tunnel --url=localhost:8000
+pnpx cloudflared tunnel --url=localhost:3000
 ```
 
-You can try editing your bot by modifying `src/commands/shop.ts`.
+You can try editing your bot by modifying `src/bot/commands/shop.ts`.
 
 ## Deploying
 
-When you're ready, you can deploy the bot with Deno deploy:
-
-```sh
-deno task build
-deployctl deploy --entrypoint=bot.gen.ts
-```
+When you're ready, this bot is intended to be deployed on [Vercel](https://vercel.com)
 
 You can check out
 [the GitHub repository](https://github.com/inbestigator/dressed) - your feedback

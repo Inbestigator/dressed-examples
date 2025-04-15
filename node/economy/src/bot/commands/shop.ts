@@ -4,15 +4,17 @@ import {
   CommandConfig,
   CommandInteraction,
 } from "@dressed/dressed";
-import { getItems } from "../db.ts";
+import { getItems } from "@/db";
 
 export const config: CommandConfig = {
   description: "View the shop",
 };
 
-export default function shop(interaction: CommandInteraction) {
-  const shopItems = getItems();
-  const rows = [];
+export default async function shop(interaction: CommandInteraction) {
+  await interaction.deferReply({ ephemeral: true });
+  const shopItems = await getItems();
+  const rows: ReturnType<typeof ActionRow<ReturnType<typeof Button>>>[] = [];
+
   for (let i = 0; i < shopItems.length; i += 5) {
     rows.push(
       ActionRow(
@@ -27,9 +29,8 @@ export default function shop(interaction: CommandInteraction) {
     );
   }
 
-  return interaction.reply({
+  return interaction.editReply({
     content: `## 🛍️ Shop`,
     components: rows,
-    ephemeral: true,
   });
 }
