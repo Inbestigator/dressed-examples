@@ -15,10 +15,10 @@ export default async function HomePage({
   if (inputPassword !== process.env.ADMIN_PASSWORD) {
     return (
       <main className="min-h-dvh items-center justify-center flex flex-col">
-        <h2 className="text-2xl font-medium">
-          Hey there, you don&apos;t seem to have the password.
+        <h2 className="text-3xl font-medium">
+          Hey there 👋, you don&apos;t seem to have the password.
         </h2>
-        <p className="text-lg mt-4 flex gap-4">
+        <p className="mt-8 flex gap-4">
           <Button size="lg" asChild>
             <Link
               href={`https://discord.com/oauth2/authorize?client_id=${process.env.DISCORD_APP_ID}`}
@@ -27,7 +27,7 @@ export default async function HomePage({
               Invite this bot
             </Link>
           </Button>
-          <Button size="lg" asChild>
+          <Button size="lg" variant="outline" asChild>
             <Link
               href="https://github.com/inbestigator/dressed-examples/tree/main/node/economy"
               target="_blank"
