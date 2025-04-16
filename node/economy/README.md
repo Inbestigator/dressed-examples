@@ -4,7 +4,7 @@ This bot is intended as an example of the functionality for
 [Dressed](https://dressed.vercel.app). Users can register, check their balance,
 claim daily rewards, view the shop, and buy items.
 
-This bot has an admin dashboard made using Next.js, where you can moderate user balances and shop items. (incomplete)
+This bot has an admin dashboard made using Next.js, where you can moderate user balances and shop items.
 
 ## Commands
 
@@ -18,7 +18,7 @@ This bot has an admin dashboard made using Next.js, where you can moderate user 
 
 1. Clone the project:
    ```sh
-   deno -A jsr:@dressed/cmd create my-bot deno/economy
+   deno -A jsr:@dressed/cmd create my-bot node/economy
    ```
 
 2. Install dependencies:
