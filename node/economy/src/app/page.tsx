@@ -1,5 +1,7 @@
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Dashboard from "@/components/dashboard";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 export default async function HomePage({
   searchParams,
@@ -12,8 +14,28 @@ export default async function HomePage({
 
   if (inputPassword !== process.env.ADMIN_PASSWORD) {
     return (
-      <main className="min-h-dvh items-center justify-center flex">
-        You need to provide the correct password to access the dashboard.
+      <main className="min-h-dvh items-center justify-center flex flex-col">
+        <h2 className="text-2xl font-medium">
+          Hey there, you don&apos;t seem to have the password.
+        </h2>
+        <p className="text-lg mt-4 flex gap-4">
+          <Button size="lg" asChild>
+            <Link
+              href={`https://discord.com/oauth2/authorize?client_id=${process.env.DISCORD_APP_ID}`}
+              target="_blank"
+            >
+              Invite this bot
+            </Link>
+          </Button>
+          <Button size="lg" asChild>
+            <Link
+              href="https://github.com/inbestigator/dressed-examples/tree/main/node/economy"
+              target="_blank"
+            >
+              Deploy your own
+            </Link>
+          </Button>
+        </p>
       </main>
     );
   }
