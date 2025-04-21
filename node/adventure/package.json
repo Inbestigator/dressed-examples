@@ -8,8 +8,8 @@
     "bundle": "tsup"
   },
   "dependencies": {
-    "@dressed/cmd": "npm:@jsr/dressed__cmd@^0.1.10",
-    "@dressed/dressed": "npm:@jsr/dressed__dressed@^1.2.0"
+    "@dressed/cmd": "npm:@jsr/dressed__cmd@^0.1.11",
+    "@dressed/dressed": "npm:@jsr/dressed__dressed@^1.3.0"
   },
   "devDependencies": {
     "@types/node": "^22.14.0",

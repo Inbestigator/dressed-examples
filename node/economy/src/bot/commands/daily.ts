@@ -12,7 +12,7 @@ export default async function balance(interaction: CommandInteraction) {
     return interaction.editReply("You aren't registered!");
   } else if (
     user.last_daily_reward &&
-    new Date(user.last_daily_reward).getTime() - Date.now() < 86400000
+    Date.now() - new Date(user.last_daily_reward).getTime() < 86400000
   ) {
     return interaction.editReply("You have already claimed your daily reward!");
   }
