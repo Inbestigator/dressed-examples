@@ -1,7 +1,6 @@
 # Simple Bot
 
-This is a simple example bot made with
-[Dressed](https://dressed.vercel.app).
+This is a simple example bot made with [Dressed](https://dressed.vercel.app).
 
 ## Commands
 

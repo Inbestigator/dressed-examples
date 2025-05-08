@@ -13,7 +13,7 @@ export async function POST(req: Request) {
     ] as ((i: unknown) => Promise<void>)[];
     return handleRequest(
         req,
-        (i) => waitUntil(runCommand(i)),
-        (i) => waitUntil(runComponent(i)),
+        async (i) => waitUntil(runCommand(i)),
+        async (i) => waitUntil(runComponent(i)),
     );
 }

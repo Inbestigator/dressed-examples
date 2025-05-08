@@ -16,7 +16,7 @@ export async function POST(
     ];
     return handleRequest(
         req,
-        (i) => res.waitUntil(runCommand(i)),
-        (i) => res.waitUntil(runComponent(i)),
+        async (i) => res.waitUntil(runCommand(i)),
+        async (i) => res.waitUntil(runComponent(i)),
     );
 }

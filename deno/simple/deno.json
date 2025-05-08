@@ -6,6 +6,6 @@
     "start": "deno -A --unstable-kv ./bot.gen.ts"
   },
   "imports": {
-    "@dressed/dressed": "jsr:@dressed/dressed@^1.2.0"
+    "@dressed/dressed": "jsr:@dressed/dressed@^1.4.0"
   }
 }

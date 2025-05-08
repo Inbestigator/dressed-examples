@@ -7,16 +7,17 @@ export default async function guess(
 ) {
   const question = triviaData[interaction.user.id];
 
-  const updatedButtons = interaction.message.components![0].components.map(
-    (button) => ({
-      ...button,
-      style: (button as { label: string }).label ===
-          (question as { correctAnswer: string }).correctAnswer
-        ? 3
-        : 4,
-      disabled: true,
-    }),
-  );
+  const updatedButtons =
+    interaction.message.components?.find((c) => c.type === 1)?.components.map(
+      (button) => ({
+        ...button,
+        style: (button as { label: string }).label ===
+            (question as { correctAnswer: string }).correctAnswer
+          ? 3
+          : 4,
+        disabled: true,
+      }),
+    ) ?? [];
 
   if (
     (question as { correctAnswer: string }).correctAnswer
