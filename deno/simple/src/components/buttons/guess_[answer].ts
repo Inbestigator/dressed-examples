@@ -1,4 +1,4 @@
-import { ActionRow, MessageComponentInteraction } from "@dressed/dressed";
+import { ActionRow, type MessageComponentInteraction } from "@dressed/dressed";
 const kv = await Deno.openKv();
 
 export default async function guess(
@@ -9,16 +9,15 @@ export default async function guess(
     correctAnswer: string;
   };
 
-  const updatedButtons =
-    (interaction.message.components?.find((c) => c.type === 1))?.components.map(
-      (button) => ({
-        ...button,
-        style: (button as { label: string }).label === question.correctAnswer
-          ? 3
-          : 4,
-        disabled: true,
-      }),
-    ) ?? [];
+  const updatedButtons = interaction.message.components
+    ?.find((c) => c.type === 1)
+    ?.components.map((button) => ({
+      ...button,
+      style: (button as { label: string }).label === question.correctAnswer
+        ? 3
+        : 4,
+      disabled: true,
+    })) ?? [];
 
   if (question.correctAnswer.toLowerCase().replace(/[^a-z]/g, "_") !== answer) {
     await interaction.update({

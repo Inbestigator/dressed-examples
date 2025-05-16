@@ -1,9 +1,4 @@
-import {
-  ActionRow,
-  Button,
-  type CommandConfig,
-  type CommandInteraction,
-} from "@dressed/dressed";
+import { ActionRow, Button, type CommandConfig, type CommandInteraction } from "dressed";
 
 export const triviaData: Record<string, object> = {};
 
@@ -21,9 +16,7 @@ export default async function trivia(interaction: CommandInteraction) {
 
   triviaData[interaction.user.id] = question;
 
-  const answers = question.incorrectAnswers.concat(
-    question.correctAnswer,
-  );
+  const answers = question.incorrectAnswers.concat(question.correctAnswer);
 
   const buttons = answers
     .sort(() => Math.random() - 0.5)

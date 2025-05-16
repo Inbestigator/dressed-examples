@@ -1,9 +1,7 @@
-import { MessageComponentInteraction } from "@dressed/dressed";
+import { MessageComponentInteraction } from "dressed";
 import { setCount, showCount } from "../../commands/counter.ts";
 
-export default async function resetCounter(
-  interaction: MessageComponentInteraction,
-) {
+export default async function resetCounter(interaction: MessageComponentInteraction) {
   setCount(0);
 
   await interaction.update(showCount(0));

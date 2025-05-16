@@ -1,4 +1,4 @@
-import type { CommandConfig, CommandInteraction } from "@dressed/dressed";
+import type { CommandConfig, CommandInteraction } from "dressed";
 import db, { getUser } from "@/db";
 
 export const config: CommandConfig = {
@@ -18,18 +18,13 @@ export default async function balance(interaction: CommandInteraction) {
   }
 
   user.balance += 50;
-  interaction.editReply(
-    `You have been given $50! Your new balance is $${user.balance}.`,
-  );
-  await db.execute(
-    {
-      sql:
-        "UPDATE users SET balance = :balance, last_daily_reward = :now WHERE discord_id = :id",
-      args: {
-        balance: user.balance,
-        now: new Date(),
-        id: user.discord_id,
-      },
+  interaction.editReply(`You have been given $50! Your new balance is $${user.balance}.`);
+  await db.execute({
+    sql: "UPDATE users SET balance = :balance, last_daily_reward = :now WHERE discord_id = :id",
+    args: {
+      balance: user.balance,
+      now: new Date(),
+      id: user.discord_id,
     },
-  );
+  });
 }

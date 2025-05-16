@@ -1,22 +1,5 @@
-import {
-    handleRequest,
-    setupCommands,
-    setupComponents,
-} from "@dressed/dressed/server";
+import createHandler from "@dressed/next";
 // @ts-ignore Should appear after bundle
-import { commandData, componentData } from "../dist/bot.gen.js";
+import { commands, components, events } from "../dist/bot.gen.js";
 
-export async function POST(
-    req: Request,
-    res: { waitUntil: (c: unknown) => void },
-) {
-    const [runCommand, runComponent] = [
-        setupCommands(commandData),
-        setupComponents(componentData),
-    ];
-    return handleRequest(
-        req,
-        async (i) => res.waitUntil(runCommand(i)),
-        async (i) => res.waitUntil(runComponent(i)),
-    );
-}
+export const POST = createHandler(commands, components, events);

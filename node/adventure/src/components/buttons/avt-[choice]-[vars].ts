@@ -1,8 +1,4 @@
-import {
-  ActionRow,
-  Button,
-  type MessageComponentInteraction,
-} from "@dressed/dressed";
+import { ActionRow, Button, type MessageComponentInteraction } from "dressed";
 import { story } from "@/story.ts";
 
 function random(min: number, max: number) {
@@ -11,11 +7,10 @@ function random(min: number, max: number) {
 
 export default function avtButton(
   interaction: MessageComponentInteraction,
-  args: { choice: string; vars: string },
+  args: { choice: string; vars: string }
 ) {
   if (interaction.message) {
-    interaction.reply = interaction
-      .update as unknown as typeof interaction.reply;
+    interaction.reply = interaction.update as unknown as typeof interaction.reply;
   }
   let storyPoint = story[args.choice as keyof typeof story];
 
@@ -28,16 +23,15 @@ export default function avtButton(
             const [min, max] = key.split("/").map(Number);
             return random(min ?? 0, max ?? 0) === parseInt(value);
           }
-          return (vars[key] !== value);
+          return vars[key] !== value;
         })
-      ) continue;
+      )
+        continue;
       if (condition.join) {
         storyPoint = {
           ...storyPoint,
           ...condition.then,
-          choices: (storyPoint.choices ?? []).concat(
-            condition.then.choices ?? [],
-          ),
+          choices: (storyPoint.choices ?? []).concat(condition.then.choices ?? []),
           set: {
             ...(storyPoint.set ?? {}),
             ...(condition.then.set ?? {}),
@@ -71,10 +65,7 @@ export default function avtButton(
     storyPoint.text = "## Too bad!\n" + storyPoint.text;
     storyPoint.choices = undefined;
   }
-  storyPoint.text = storyPoint.text.replaceAll(
-    /{{ (.+?) }}/g,
-    (_, k) => (vars[k] ?? ""),
-  );
+  storyPoint.text = storyPoint.text.replaceAll(/{{ (.+?) }}/g, (_, k) => vars[k] ?? "");
   if (!storyPoint.choices) {
     return interaction.reply({
       content: storyPoint.text,
@@ -86,13 +77,15 @@ export default function avtButton(
     content: storyPoint.text,
     ephemeral: true,
     components: [
-      ActionRow(...storyPoint.choices.map((choice) =>
-        Button({
-          custom_id: `avt-${choice}-${JSON.stringify(vars)}`,
-          label: story[choice].choice.text,
-          emoji: { name: story[choice].choice.emoji },
-        })
-      )),
+      ActionRow(
+        ...storyPoint.choices.map((choice) =>
+          Button({
+            custom_id: `avt-${choice}-${JSON.stringify(vars)}`,
+            label: story[choice].choice.text,
+            emoji: { name: story[choice].choice.emoji },
+          })
+        )
+      ),
     ],
   });
 }

@@ -10,23 +10,22 @@ Bun, and Deno.
 - `/greet`: Returns a greeting.
 - `/trivia`: Gives a random trivia question.
 
-## Getting Started
+## Setup
 
-First, build the bot:
+1. Clone the project:
+   ```sh
+   pnpx dressed create my-bot node/simple
+   ```
 
-```sh
-pnpm install
-pnpm register
-```
+2. Install dependencies:
+   ```sh
+   pnpm install
+   ```
 
-Then start the bot in development mode:
-
-```sh
-pnpm dev
-```
-
-The custom `build.ts` script _should_ automatically fix the `bot.gen.ts` output
-to use the simple Express solution for Node in `server.ts`.
+3. Register the commands:
+   ```sh
+   pnpm register
+   ```
 
 In order to obtain a public url to use as the interactions endpoint for Discord,
 you need to forward a port, personally, I use VSCode's public port forward

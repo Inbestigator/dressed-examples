@@ -1,9 +1,9 @@
-import { MessageComponentInteraction } from "@dressed/dressed";
+import { MessageComponentInteraction } from "dressed";
 import db, { getItems, getUser } from "@/db";
 
 export default async function buy_item(
   interaction: MessageComponentInteraction,
-  args: { item: string },
+  args: { item: string }
 ) {
   await interaction.deferReply({ ephemeral: true });
   const shopItems = await getItems();
@@ -18,9 +18,7 @@ export default async function buy_item(
   }
 
   if (user.balance < item.price) {
-    return interaction.editReply(
-      "You don't have enough coins to buy that item!",
-    );
+    return interaction.editReply("You don't have enough coins to buy that item!");
   }
 
   user.balance -= item.price;

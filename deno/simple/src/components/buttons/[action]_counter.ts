@@ -1,4 +1,4 @@
-import { MessageComponentInteraction } from "@dressed/dressed";
+import type { MessageComponentInteraction } from "@dressed/dressed";
 import { showCount } from "../../commands/counter.ts";
 const kv = await Deno.openKv();
 

@@ -13,7 +13,7 @@ and choose their own branching story.
 
 1. Clone the project:
    ```sh
-   pnpx deno -A jsr:@dressed/cmd create my-bot node/adventure
+   pnpx dressed create my-bot node/adventure
    ```
 
 2. Install dependencies:

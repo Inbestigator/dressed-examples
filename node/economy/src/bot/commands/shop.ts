@@ -1,9 +1,4 @@
-import {
-  ActionRow,
-  Button,
-  CommandConfig,
-  CommandInteraction,
-} from "@dressed/dressed";
+import { ActionRow, Button, CommandConfig, CommandInteraction } from "dressed";
 import { getItems } from "@/db";
 
 export const config: CommandConfig = {
@@ -24,8 +19,8 @@ export default async function shop(interaction: CommandInteraction) {
             label: `${item.name} - $${item.price}`,
             emoji: { name: item.emoji },
           })
-        ),
-      ),
+        )
+      )
     );
   }
 

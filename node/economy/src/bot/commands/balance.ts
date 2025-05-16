@@ -1,4 +1,4 @@
-import type { CommandConfig, CommandInteraction } from "@dressed/dressed";
+import type { CommandConfig, CommandInteraction } from "dressed";
 import db, { getUser } from "@/db.ts";
 import { UserItem } from "@/types";
 
@@ -12,19 +12,19 @@ export default async function balance(interaction: CommandInteraction) {
   if (!user) {
     return interaction.editReply("You aren't registered!");
   }
-  const userItems = (await db.execute({
-    sql: `SELECT user_items.*, items.name as item_name 
+  const userItems = (
+    await db.execute({
+      sql: `SELECT user_items.*, items.name as item_name 
      FROM user_items 
      JOIN items ON user_items.item_id = items.id 
      WHERE user_items.user_id = :user_id`,
-    args: { user_id: user.id },
-  })).rows as unknown as (UserItem & { item_name: string })[];
+      args: { user_id: user.id },
+    })
+  ).rows as unknown as (UserItem & { item_name: string })[];
 
   return interaction.editReply(
-    `**Balance**:\n$${user.balance.toLocaleString()}\n**Items:**\n${
-      userItems.map((item) => `${item.quantity}x ${item.item_name}`).join(
-        "\n",
-      )
-    }`,
+    `**Balance**:\n$${user.balance.toLocaleString()}\n**Items:**\n${userItems
+      .map((item) => `${item.quantity}x ${item.item_name}`)
+      .join("\n")}`
   );
 }

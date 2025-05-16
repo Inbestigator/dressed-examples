@@ -1,8 +1,4 @@
-import type {
-  CommandConfig,
-  CommandInteraction,
-  MessageComponentInteraction,
-} from "@dressed/dressed";
+import type { CommandConfig, CommandInteraction, MessageComponentInteraction } from "dressed";
 import avtButton from "@/components/buttons/avt-[choice]-[vars].ts";
 
 export const config: CommandConfig = {

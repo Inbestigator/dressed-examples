@@ -1,4 +1,4 @@
-import { Button, MessageComponentInteraction } from "@dressed/dressed";
+import { Button, type MessageComponentInteraction } from "@dressed/dressed";
 const kv = await Deno.openKv();
 
 export default async function sweep(
@@ -11,35 +11,35 @@ export default async function sweep(
   const mines = getMineCount(minesPos, Number(x), Number(y));
 
   if (mines === -1) {
-    const updatedRows = (interaction.message.components?.filter((c) =>
-      c.type === 1
-    ))?.map((r, i) => ({
-      ...r,
-      components: r.components.map((b, j) => {
-        if (b.type === 2 && b.style === 2) {
-          return b;
-        }
-        if (j !== Number(x) || i !== Number(y)) {
-          const mines = getMineCount(minesPos, j, i);
+    const updatedRows = interaction.message.components
+      ?.filter((c) => c.type === 1)
+      ?.map((r, i) => ({
+        ...r,
+        components: r.components.map((b, j) => {
+          if (b.type === 2 && b.style === 2) {
+            return b;
+          }
+          if (j !== Number(x) || i !== Number(y)) {
+            const mines = getMineCount(minesPos, j, i);
+
+            return Button({
+              label: mines !== -1 ? mines.toString() : undefined,
+              emoji: mines === -1 ? { name: "💣" } : undefined,
+              disabled: true,
+              custom_id: `sweep_${j}_${i}`,
+            });
+          }
 
           return Button({
-            label: mines !== -1 ? mines.toString() : undefined,
-            emoji: mines === -1 ? { name: "💣" } : undefined,
+            emoji: {
+              name: "💥",
+            },
+            style: "Danger",
             disabled: true,
-            custom_id: `sweep_${j}_${i}`,
+            custom_id: `sweep_${x}_${y}`,
           });
-        }
-
-        return Button({
-          emoji: {
-            name: "💥",
-          },
-          style: "Danger",
-          disabled: true,
-          custom_id: `sweep_${x}_${y}`,
-        });
-      }),
-    }));
+        }),
+      }));
 
     await interaction.update({
       components: updatedRows,
@@ -49,32 +49,32 @@ export default async function sweep(
 
   let numCovered = -1;
 
-  let updatedRows =
-    (interaction.message.components?.filter((c) => c.type === 1))?.map(
-      (r, i) => {
-        r.components.forEach((b) => {
-          if (!b.disabled) numCovered++;
-        });
-        if (i !== Number(y)) return r;
+  let updatedRows = interaction.message.components
+    ?.filter((c) => c.type === 1)
+    ?.map((r, i) => {
+      r.components.forEach((b) => {
+        if (!b.disabled) numCovered++;
+      });
+      if (i !== Number(y)) return r;
 
-        return {
-          ...r,
-          components: r.components.map((b, j) => {
-            if (j !== Number(x)) return b;
+      return {
+        ...r,
+        components: r.components.map((b, j) => {
+          if (j !== Number(x)) return b;
 
-            return Button({
-              label: mines.toString(),
-              style: "Secondary",
-              disabled: true,
-              custom_id: `sweep_${x}_${y}`,
-            });
-          }),
-        };
-      },
-    );
+          return Button({
+            label: mines.toString(),
+            style: "Secondary",
+            disabled: true,
+            custom_id: `sweep_${x}_${y}`,
+          });
+        }),
+      };
+    });
 
   if (numCovered === minesPos.length) {
-    updatedRows = (interaction.message.components?.filter((c) => c.type === 1))
+    updatedRows = interaction.message.components
+      ?.filter((c) => c.type === 1)
       ?.map((r, i) => ({
         ...r,
         components: r.components.map((b, j) => {

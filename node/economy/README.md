@@ -18,7 +18,7 @@ This bot has an admin dashboard made using Next.js, where you can moderate user 
 
 1. Clone the project:
    ```sh
-   deno -A jsr:@dressed/cmd create my-bot node/economy
+   pnpx dressed create my-bot node/economy
    ```
 
 2. Install dependencies:

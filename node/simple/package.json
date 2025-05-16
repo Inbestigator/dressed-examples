@@ -2,14 +2,13 @@
   "scripts": {
     "dev": "pnpm build && pnpm start",
     "register": "pnpm build -r && pnpm start",
-    "build": "pnpx tsx ./node_modules/@dressed/cmd/mod.ts build -i",
+    "build": "dressed build -i",
     "start": "pnpx tsx ./bot.gen.ts"
-  },
-  "dependencies": {
-    "@dressed/cmd": "npm:@jsr/dressed__cmd@^0.1.12",
-    "@dressed/dressed": "npm:@jsr/dressed__dressed@^1.4.0"
   },
   "devDependencies": {
     "@types/node": "^22.15.16"
+  },
+  "dependencies": {
+    "dressed": "^1.6.3"
   }
 }

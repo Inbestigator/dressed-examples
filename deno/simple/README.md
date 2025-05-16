@@ -13,7 +13,7 @@ This is a simple example bot made with [Dressed](https://dressed.vercel.app).
 
 1. Clone the project:
    ```sh
-   deno -A jsr:@dressed/cmd create my-bot deno/economy
+   deno -A npm:dressed create my-bot deno/simple
    ```
 
 2. Install dependencies:

@@ -1,9 +1,4 @@
-import {
-  ActionRow,
-  Button,
-  type CommandConfig,
-  type CommandInteraction,
-} from "@dressed/dressed";
+import { ActionRow, Button, type CommandConfig, type CommandInteraction } from "dressed";
 
 export let count = 0;
 
@@ -31,7 +26,7 @@ export default async function counter(interaction: CommandInteraction) {
           label: "Reset",
           style: "Danger",
           custom_id: "reset_counter",
-        }),
+        })
       ),
     ],
   });
