@@ -8,12 +8,12 @@
     "bundle": "tsup"
   },
   "devDependencies": {
-    "@types/node": "^22.15.16",
+    "@types/node": "^22.15.18",
     "tsup": "^8.4.0",
     "typescript": "^5.8.3"
   },
   "dependencies": {
-    "@dressed/next": "^1.0.2",
+    "@dressed/next": "^1.0.4",
     "dressed": "^1.6.3"
   }
 }
