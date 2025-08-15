@@ -3,7 +3,7 @@
   "scripts": {
     "dev": "bun run build -i && bun start",
     "register": "bun run build -r && bun start",
-    "build": "dressed build -p 3000 -e /bot",
+    "build": "dressed build",
     "start": "bun .dressed"
   },
   "devDependencies": {
