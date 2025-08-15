@@ -12,18 +12,20 @@ and choose their own branching story.
 ## Setup
 
 1. Clone the project:
+
    ```sh
-   pnpx dressed create my-bot node/adventure
+   bunx dressed create my-bot node/adventure
    ```
 
 2. Install dependencies:
+
    ```sh
-   pnpm install
+   bun install
    ```
 
 3. Register the commands:
    ```sh
-   pnpm register
+   bun register
    ```
 
 ## Getting Started
@@ -31,7 +33,7 @@ and choose their own branching story.
 First, run the development bot:
 
 ```sh
-pnpm dev
+bun dev
 ```
 
 In order to obtain a public url to use as the interactions endpoint for Discord,
