@@ -1,37 +1,36 @@
-import { ActionRow, Button, type CommandConfig, type CommandInteraction } from "dressed";
-
-export let count = 0;
-
-export function setCount(newCount: number) {
-  count = newCount;
-}
+import {
+  ActionRow,
+  Button,
+  TextDisplay,
+  type CommandConfig,
+  type CommandInteraction,
+} from "dressed";
 
 export const config: CommandConfig = {
   description: "Increments a counter",
 };
 
 export default async function counter(interaction: CommandInteraction) {
-  count++;
-
   await interaction.reply({
-    content: showCount(count),
+    components: countDisplay(1),
     ephemeral: true,
-    components: [
-      ActionRow(
-        Button({
-          label: "Add",
-          custom_id: "add_counter",
-        }),
-        Button({
-          label: "Reset",
-          style: "Danger",
-          custom_id: "reset_counter",
-        })
-      ),
-    ],
+    flags: 1 << 15,
   });
 }
 
-export function showCount(count: unknown) {
-  return `I've been run ${count} time${count == 1 ? "" : "s"}!`;
+export function countDisplay(count: number) {
+  return [
+    TextDisplay(`I've been run ${count} time${count === 1 ? "" : "s"}!`),
+    ActionRow(
+      Button({
+        label: "Add",
+        custom_id: `set-counter-${count + 1}`,
+      }),
+      Button({
+        label: "Reset",
+        style: "Danger",
+        custom_id: "set-counter-0",
+      })
+    ),
+  ];
 }

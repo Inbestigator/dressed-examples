@@ -5,7 +5,7 @@ import {
   type CommandInteraction,
   CommandOption,
 } from "@dressed/dressed";
-import { getMineCount } from "../components/buttons/sweep_[x]_[y].ts";
+import { getMineCount } from "../components/buttons/sweep_:x_:y.ts";
 
 const kv = await Deno.openKv();
 
@@ -61,7 +61,7 @@ export default async function minesweeper(interaction: CommandInteraction) {
               emoji: { name: "❔" },
               custom_id: `sweep_${x}_${y}`,
             });
-          }),
+          })
       )
     );
 

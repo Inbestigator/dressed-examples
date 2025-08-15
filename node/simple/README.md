@@ -13,18 +13,20 @@ Bun, and Deno.
 ## Setup
 
 1. Clone the project:
+
    ```sh
-   pnpx dressed create my-bot node/simple
+   bunx dressed create my-bot node/simple
    ```
 
 2. Install dependencies:
+
    ```sh
-   pnpm install
+   bun install
    ```
 
 3. Register the commands:
    ```sh
-   pnpm register
+   bun register
    ```
 
 In order to obtain a public url to use as the interactions endpoint for Discord,
@@ -40,8 +42,8 @@ You can try editing your bot by modifying `src/commands/greet.ts`.
 When you're ready, you can try to deploy the bot with Deno deploy:
 
 ```sh
-pnpm build
-deployctl deploy --entrypoint=bot.gen.ts
+bun run build
+deployctl deploy --entrypoint=.dressed/index.mjs
 ```
 
 You can check out

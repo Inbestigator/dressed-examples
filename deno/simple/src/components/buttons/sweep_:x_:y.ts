@@ -3,10 +3,9 @@ const kv = await Deno.openKv();
 
 export default async function sweep(
   interaction: MessageComponentInteraction,
-  { x, y }: Record<string, string>,
+  { x, y }: Record<string, string>
 ) {
-  const minesPos = (await kv.get(["sweeper", interaction.user.id]))
-    .value as number[];
+  const minesPos = (await kv.get(["sweeper", interaction.user.id])).value as number[];
 
   const mines = getMineCount(minesPos, Number(x), Number(y));
 

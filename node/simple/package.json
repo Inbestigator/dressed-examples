@@ -1,14 +1,14 @@
 {
   "scripts": {
-    "dev": "pnpm build && pnpm start",
-    "register": "pnpm build -r && pnpm start",
-    "build": "dressed build -i",
-    "start": "pnpx tsx ./bot.gen.ts"
+    "dev": "bun run build -i && bun start",
+    "register": "bun run build -r && bun start",
+    "build": "dressed build",
+    "start": "bun .dressed"
   },
   "devDependencies": {
-    "@types/node": "^22.15.16"
+    "@types/node": "^24.2.1"
   },
   "dependencies": {
-    "dressed": "^1.6.3"
+    "dressed": "^1.9.1"
   }
 }

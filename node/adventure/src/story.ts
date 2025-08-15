@@ -54,8 +54,8 @@ export const story: Record<StoryKey, StoryNode> = {
     },
     text: "Choose your fighter!",
     set: {
-      health: "5",
-      enemyHealth: "5",
+      h: "5",
+      eh: "5",
     },
     choices: ["pickandchew", "charhazard"],
   },
@@ -66,7 +66,7 @@ export const story: Record<StoryKey, StoryNode> = {
     },
     text: "You picked Pickandchew! Lightning is your best weapon!",
     set: {
-      fighter: "pick",
+      f: "pick",
     },
     choices: ["attack"],
   },
@@ -77,7 +77,7 @@ export const story: Record<StoryKey, StoryNode> = {
     },
     text: "You picked Charhazard! Fire is your element!",
     set: {
-      fighter: "char",
+      f: "char",
     },
     choices: ["attack"],
   },
@@ -86,17 +86,16 @@ export const story: Record<StoryKey, StoryNode> = {
       text: "Attack",
       emoji: "⚔️",
     },
-    text:
-      "**Your health**: {{ health }} **Enemy health**: {{ enemyHealth }}\n\nChoose your attack!",
+    text: "**Your health**: {{ h }} **Enemy health**: {{ eh }}\n\nChoose your attack!",
     conditions: [
       {
-        if: { fighter: "pick" },
+        if: { f: "pick" },
         then: {
           choices: ["attackThunder", "attackStrike", "healShock"],
         },
       },
       {
-        if: { fighter: "char" },
+        if: { f: "char" },
         then: {
           choices: ["attackFlame", "attackSwipe", "healSoar"],
         },
@@ -108,17 +107,16 @@ export const story: Record<StoryKey, StoryNode> = {
       text: "Thunderzap",
       emoji: "⚡",
     },
-    text:
-      "**Your health**: {{ health }} **Enemy health**: {{ enemyHealth }}\nYou chose the Thunderzap attack!",
+    text: "**Your health**: {{ h }} **Enemy health**: {{ eh }}\nYou chose the Thunderzap attack!",
     set: {
-      attack: "thunder",
-      enemyHealth: (v) => (parseInt(v.enemyHealth ?? "0") - 1).toString(),
+      a: "thunder",
+      eh: (v) => (parseInt(v.eh ?? "0") - 1).toString(),
     },
     conditions: [
       {
-        if: { enemyHealth: "1" },
+        if: { eh: "1" },
         then: {
-          set: { enemyHealth: "0" },
+          set: { eh: "0" },
           choices: ["win"],
         },
         stop: true,
@@ -131,25 +129,24 @@ export const story: Record<StoryKey, StoryNode> = {
       text: "Speedy Strike",
       emoji: "🔥",
     },
-    text:
-      "**Your health**: {{ health }} **Enemy health**: {{ enemyHealth }}\nYou chose the Speedy Strike attack!",
+    text: "**Your health**: {{ h }} **Enemy health**: {{ eh }}\nYou chose the Speedy Strike attack!",
     set: {
-      attack: "strike",
-      enemyHealth: (v) => (parseInt(v.enemyHealth ?? "0") - 2).toString(),
+      a: "strike",
+      eh: (v) => (parseInt(v.eh ?? "0") - 2).toString(),
     },
     conditions: [
       {
-        if: { enemyHealth: "1" },
+        if: { eh: "1" },
         then: {
-          set: { enemyHealth: "0" },
+          set: { eh: "0" },
           choices: ["win"],
         },
         stop: true,
       },
       {
-        if: { enemyHealth: "2" },
+        if: { eh: "2" },
         then: {
-          set: { enemyHealth: "0" },
+          set: { eh: "0" },
           choices: ["win"],
         },
         stop: true,
@@ -162,14 +159,10 @@ export const story: Record<StoryKey, StoryNode> = {
       text: "Stunning Heal",
       emoji: "❤️‍🩹",
     },
-    text:
-      "**Your health**: {{ health }} **Enemy health**: {{ enemyHealth }}\nYou stunned the enemy and healed!",
+    text: "**Your health**: {{ h }} **Enemy health**: {{ eh }}\nYou stunned the enemy and healed!",
     set: {
-      attack: "shock",
-      health: (v) =>
-        v.health !== "5"
-          ? (parseInt(v.health ?? "0") + 1).toString()
-          : v.health,
+      a: "shock",
+      h: (v) => (v.h !== "5" ? (parseInt(v.h ?? "0") + 1).toString() : v.h),
     },
     choices: ["defend"],
   },
@@ -178,17 +171,16 @@ export const story: Record<StoryKey, StoryNode> = {
       text: "Flareblast",
       emoji: "🔥",
     },
-    text:
-      "**Your health**: {{ health }} **Enemy health**: {{ enemyHealth }}\nYou chose the Flareblast attack!",
+    text: "**Your health**: {{ h }} **Enemy health**: {{ eh }}\nYou chose the Flareblast attack!",
     set: {
-      attack: "flame",
-      enemyHealth: (v) => (parseInt(v.enemyHealth ?? "0") - 1).toString(),
+      a: "flame",
+      eh: (v) => (parseInt(v.eh ?? "0") - 1).toString(),
     },
     conditions: [
       {
-        if: { enemyHealth: "1" },
+        if: { eh: "1" },
         then: {
-          set: { enemyHealth: "0" },
+          set: { eh: "0" },
           choices: ["win"],
         },
         stop: true,
@@ -201,14 +193,10 @@ export const story: Record<StoryKey, StoryNode> = {
       text: "Soaring Heal",
       emoji: "❤️‍🩹",
     },
-    text:
-      "**Your health**: {{ health }} **Enemy health**: {{ enemyHealth }}\nYou chose to fly into the air and heal!",
+    text: "**Your health**: {{ h }} **Enemy health**: {{ eh }}\nYou chose to fly into the air and heal!",
     set: {
-      attack: "soar",
-      health: (v) =>
-        v.health !== "5"
-          ? (parseInt(v.health ?? "0") + 1).toString()
-          : v.health,
+      a: "soar",
+      h: (v) => (v.h !== "5" ? (parseInt(v.h ?? "0") + 1).toString() : v.h),
     },
     choices: ["defend"],
   },
@@ -217,25 +205,24 @@ export const story: Record<StoryKey, StoryNode> = {
       text: "Dragon Swipe",
       emoji: "🐉",
     },
-    text:
-      "**Your health**: {{ health }} **Enemy health**: {{ enemyHealth }}\nYou chose the Dragon Swipe attack!",
+    text: "**Your health**: {{ h }} **Enemy health**: {{ eh }}\nYou chose the Dragon Swipe attack!",
     set: {
-      attack: "swipe",
-      enemyHealth: (v) => (parseInt(v.enemyHealth ?? "0") - 2).toString(),
+      a: "swipe",
+      eh: (v) => (parseInt(v.eh ?? "0") - 2).toString(),
     },
     conditions: [
       {
-        if: { enemyHealth: "1" },
+        if: { eh: "1" },
         then: {
-          set: { enemyHealth: "0" },
+          set: { eh: "0" },
           choices: ["win"],
         },
         stop: true,
       },
       {
-        if: { enemyHealth: "2" },
+        if: { eh: "2" },
         then: {
-          set: { enemyHealth: "0" },
+          set: { eh: "0" },
           choices: ["win"],
         },
         stop: true,
@@ -248,63 +235,61 @@ export const story: Record<StoryKey, StoryNode> = {
       text: "Enemy turn",
       emoji: "⚔️",
     },
-    text:
-      "**Your health**: {{ health }} **Enemy health**: {{ enemyHealth }}\nThe enemy chose {{ enemyAttack }}\n\nChoose your attack!",
+    text: "**Your health**: {{ h }} **Enemy health**: {{ eh }}\nThe enemy chose {{ ea }}\n\nChoose your attack!",
     set: {
-      enemyAttack: "Hydrobomb",
-      health: (v) => {
+      ea: "Hydrobomb",
+      h: (v) => {
         const damage = Math.floor(Math.random() * 2) + 1;
-        if ((parseInt(v.health ?? "0") - damage) <= 0) {
+        if (parseInt(v.h ?? "0") - damage <= 0) {
           return "1";
         }
-        return (parseInt(v.health ?? "0") - damage).toString();
+        return (parseInt(v.h ?? "0") - damage).toString();
       },
     },
     conditions: [
       {
-        if: { attack: "thunder" },
+        if: { a: "thunder" },
         then: {
           choices: ["attackStrike", "healShock"],
         },
       },
       {
-        if: { attack: "strike" },
+        if: { a: "strike" },
         then: {
           choices: ["attackThunder", "healShock"],
         },
       },
       {
-        if: { attack: "shock" },
+        if: { a: "shock" },
         then: {
           choices: ["attackThunder", "attackStrike"],
         },
       },
       {
-        if: { attack: "flame" },
+        if: { a: "flame" },
         then: {
           choices: ["attackSwipe", "healSoar"],
         },
       },
       {
-        if: { attack: "soar" },
+        if: { a: "soar" },
         then: {
           choices: ["attackFlame", "attackSwipe"],
         },
       },
       {
-        if: { attack: "swipe" },
+        if: { a: "swipe" },
         then: {
           choices: ["attackFlame", "healSoar"],
         },
       },
       {
-        if: { health: "1" },
+        if: { h: "1" },
         then: {
           set: {
-            health: "0",
+            h: "0",
           },
-          text:
-            "**Your health**: {{ health }} **Enemy health**: {{ enemyHealth }}\nThe enemy chose {{ enemyattack }}",
+          text: "**Your health**: {{ h }} **Enemy health**: {{ eh }}\nThe enemy chose {{ ea }}",
           choices: ["lose"],
         },
         stop: true,
@@ -315,10 +300,7 @@ export const story: Record<StoryKey, StoryNode> = {
         },
         then: {
           set: {
-            enemyHealth: (v) =>
-              v.enemyHealth !== "5"
-                ? (parseInt(v.enemyHealth ?? "0") + 1).toString()
-                : v.enemyHealth,
+            eh: (v) => (v.eh !== "5" ? (parseInt(v.eh ?? "0") + 1).toString() : v.eh),
           },
         },
       },

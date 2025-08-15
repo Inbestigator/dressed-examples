@@ -1,19 +1,18 @@
 {
   "type": "module",
   "scripts": {
-    "dev": "pnpm build && pnpm start",
-    "register": "pnpm build -r && pnpm start",
-    "build": "dressed build -i",
-    "start": "pnpx tsx bot.gen.ts",
-    "bundle": "tsup"
+    "dev": "bun run build -i && bun start",
+    "register": "bun run build -r && bun start",
+    "build": "dressed build -p 3000 -e /bot",
+    "start": "bun .dressed"
   },
   "devDependencies": {
-    "@types/node": "^22.15.18",
-    "tsup": "^8.4.0",
-    "typescript": "^5.8.3"
+    "@types/node": "^24.2.1",
+    "tsup": "^8.5.0",
+    "typescript": "^5.9.2"
   },
   "dependencies": {
-    "@dressed/next": "^1.0.4",
-    "dressed": "^1.6.3"
+    "@dressed/next": "^1.3.0",
+    "dressed": "^1.9.1"
   }
 }

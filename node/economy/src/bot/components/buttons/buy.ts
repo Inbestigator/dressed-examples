@@ -1,13 +1,18 @@
-import { MessageComponentInteraction } from "dressed";
+import type { MessageComponentInteraction } from "dressed";
+import type { Params } from "@dressed/matcher";
 import db, { getItems, getUser } from "@/db";
 
-export default async function buy_item(
+export const pattern = "buy_:item";
+
+export default async function buyItem(
   interaction: MessageComponentInteraction,
-  args: { item: string }
+  args: Params<typeof pattern>
 ) {
-  await interaction.deferReply({ ephemeral: true });
-  const shopItems = await getItems();
-  const user = await getUser(interaction.user.id);
+  const [shopItems, user] = await Promise.all([
+    getItems(),
+    getUser(interaction.user.id),
+    interaction.deferReply({ ephemeral: true }),
+  ]);
   if (!user) {
     return interaction.editReply("You aren't registered!");
   }
@@ -21,12 +26,10 @@ export default async function buy_item(
     return interaction.editReply("You don't have enough coins to buy that item!");
   }
 
-  user.balance -= item.price;
-
   await db.batch([
     {
       sql: "UPDATE users SET balance = :balance WHERE discord_id = :id",
-      args: { balance: user.balance, id: user.discord_id },
+      args: { balance: user.balance - item.price, id: user.discord_id },
     },
     {
       sql: `

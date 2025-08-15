@@ -17,18 +17,20 @@ This bot has an admin dashboard made using Next.js, where you can moderate user 
 ## Setup
 
 1. Clone the project:
+
    ```sh
-   pnpx dressed create my-bot node/economy
+   bunx dressed create my-bot node/economy
    ```
 
 2. Install dependencies:
+
    ```sh
-   pnpm install
+   bun install
    ```
 
 3. Register the commands:
    ```sh
-   pnpm register
+   bun register
    ```
 
 ## Getting Started
@@ -36,7 +38,7 @@ This bot has an admin dashboard made using Next.js, where you can moderate user 
 First, run the development bot:
 
 ```sh
-pnpm dev
+bun dev
 ```
 
 In order to obtain a public url to use as the interactions endpoint for Discord,
@@ -46,7 +48,7 @@ system
 If you aren't using VSCode, Cloudflared is a good cli option.
 
 ```sh
-pnpx cloudflared tunnel --url=localhost:3000
+bunx cloudflared tunnel --url=localhost:3000
 ```
 
 You can try editing your bot by modifying `src/bot/commands/shop.ts`.

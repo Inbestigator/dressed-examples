@@ -1,7 +1,7 @@
 .env
 deno.lock
-bot.gen.ts
-pnpm-lock.yaml
+.dressed
 node_modules
 .DS_Store
 *.db
+.dressed

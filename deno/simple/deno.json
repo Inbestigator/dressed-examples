@@ -1,11 +1,11 @@
 {
   "tasks": {
-    "dev": "deno task build && deno -A --unstable-kv --watch ./bot.gen.ts",
+    "dev": "deno task build && deno -A --unstable-kv --watch .dressed",
     "register": "deno task build -r && deno task start",
     "build": "deno -A npm:dressed build -i",
-    "start": "deno -A --unstable-kv ./bot.gen.ts"
+    "start": "deno -A --unstable-kv .dressed"
   },
   "imports": {
-    "@dressed/dressed": "jsr:@dressed/dressed@^1.6.3"
+    "@dressed/dressed": "jsr:@dressed/dressed@^1.9.1"
   }
 }

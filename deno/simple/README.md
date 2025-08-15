@@ -12,11 +12,13 @@ This is a simple example bot made with [Dressed](https://dressed.vercel.app).
 ## Setup
 
 1. Clone the project:
+
    ```sh
    deno -A npm:dressed create my-bot deno/simple
    ```
 
 2. Install dependencies:
+
    ```sh
    deno install
    ```
@@ -52,7 +54,7 @@ When you're ready, you can deploy the bot with Deno deploy:
 
 ```sh
 deno task build
-deployctl deploy --entrypoint=bot.gen.ts
+deployctl deploy --entrypoint=.dressed
 ```
 
 You can check out

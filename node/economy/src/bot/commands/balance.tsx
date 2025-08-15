@@ -1,4 +1,5 @@
-import type { CommandConfig, CommandInteraction } from "dressed";
+import { Container, TextDisplay, type CommandInteraction } from "@dressed/react";
+import type { CommandConfig } from "dressed";
 import db, { getUser } from "@/db.ts";
 import { UserItem } from "@/types";
 
@@ -7,11 +8,15 @@ export const config: CommandConfig = {
 };
 
 export default async function balance(interaction: CommandInteraction) {
-  await interaction.deferReply({ ephemeral: true });
-  const user = await getUser(interaction.user.id);
+  const [user] = await Promise.all([
+    getUser(interaction.user.id),
+    interaction.deferReply({ ephemeral: true }),
+  ]);
+
   if (!user) {
     return interaction.editReply("You aren't registered!");
   }
+
   const userItems = (
     await db.execute({
       sql: `SELECT user_items.*, items.name as item_name 
@@ -23,8 +28,10 @@ export default async function balance(interaction: CommandInteraction) {
   ).rows as unknown as (UserItem & { item_name: string })[];
 
   return interaction.editReply(
-    `**Balance**:\n$${user.balance.toLocaleString()}\n**Items:**\n${userItems
-      .map((item) => `${item.quantity}x ${item.item_name}`)
-      .join("\n")}`
+    <Container>
+      <TextDisplay>### Balance:</TextDisplay>${user.balance.toLocaleString()}
+      <TextDisplay>### Items:</TextDisplay>
+      {userItems.map((item) => `${item.quantity}x ${item.item_name}`).join("\n")}
+    </Container>
   );
 }
