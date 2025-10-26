@@ -1,10 +1,10 @@
 "use client";
 
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { ShopTable } from "@/components/shop-table";
 import { TabsContent } from "@/components/ui/tabs";
 import { UsersTable } from "@/components/users-table";
-import { ShopTable } from "@/components/shop-table";
-import { Item, User } from "@/types";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import type { Item, User } from "@/types";
 
 export default function Dashboard({ password }: { password: string }) {
   const queryClient = useQueryClient();

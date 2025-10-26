@@ -1,13 +1,10 @@
-import type { MessageComponentInteraction } from "dressed";
 import type { Params } from "@dressed/matcher";
+import type { MessageComponentInteraction } from "dressed";
 import db, { getItems, getUser } from "@/db";
 
 export const pattern = "buy_:item";
 
-export default async function buyItem(
-  interaction: MessageComponentInteraction,
-  args: Params<typeof pattern>
-) {
+export default async function buyItem(interaction: MessageComponentInteraction, args: Params<typeof pattern>) {
   const [shopItems, user] = await Promise.all([
     getItems(),
     getUser(interaction.user.id),

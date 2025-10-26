@@ -1,7 +1,7 @@
 # Adventure Bot
 
 This bot is intended as an example of the functionality for
-[Dressed](https://dressed.vercel.app) that is compatible with Node,
+[Dressed](https://dressed.js.org) that is compatible with Node,
 Bun, and Deno. Users can start a text-based adventure
 and choose their own branching story.
 
@@ -50,7 +50,7 @@ You can try editing your bot by modifying `src/story.ts`.
 
 ## Deploying
 
-When you're ready, you can try to deploy the bot on Vercel, for more information on that, see [their documentation](https://vercel.com/docs/deployments).
+When you're ready, you can try to deploying the bot. See [the deploying guides](https://dressed.js.org/docs/guide/deploying) for more information.
 
 You can check out
 [the GitHub repository](https://github.com/inbestigator/dressed) - your feedback

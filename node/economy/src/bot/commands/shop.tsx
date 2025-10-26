@@ -1,10 +1,10 @@
-import { type CommandInteraction, ActionRow, Button, Container } from "@dressed/react";
-import { CommandConfig } from "dressed";
+import { ActionRow, Button, type CommandInteraction, Container } from "@dressed/react";
+import type { CommandConfig } from "dressed";
 import { getItems } from "@/db";
 
-export const config: CommandConfig = {
+export const config = {
   description: "View the shop",
-};
+} satisfies CommandConfig;
 
 export default async function shop(interaction: CommandInteraction) {
   const [shopItems] = await Promise.all([getItems(), interaction.deferReply({ ephemeral: true })]);
@@ -12,10 +12,10 @@ export default async function shop(interaction: CommandInteraction) {
     <Container>
       ## 🛍️ Shop
       {chunk(shopItems, 5).map((row, i) => (
-        <ActionRow key={i}>
-          {row.map((item, i) => (
+        <ActionRow key={i.toString()}>
+          {row.map((item) => (
             <Button
-              key={i}
+              key={item.id}
               custom_id={`buy_${item.name.toLowerCase()}`}
               label={`${item.name} - $${item.price}`}
               emoji={{ name: item.emoji }}
@@ -23,7 +23,7 @@ export default async function shop(interaction: CommandInteraction) {
           ))}
         </ActionRow>
       ))}
-    </Container>
+    </Container>,
   );
 }
 

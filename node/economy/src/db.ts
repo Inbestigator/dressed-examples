@@ -1,9 +1,9 @@
-import { Item, User } from "./types.ts";
 import { createClient } from "@libsql/client";
+import type { Item, User } from "./types.ts";
 
 const db = createClient({
-  url: process.env.DATABASE_URL!,
-  authToken: process.env.DATABASE_AUTH_TOKEN!,
+  url: process.env.DATABASE_URL as string,
+  authToken: process.env.DATABASE_AUTH_TOKEN,
 });
 
 db.executeMultiple(`

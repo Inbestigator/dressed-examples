@@ -1,15 +1,9 @@
-import {
-  ActionRow,
-  Button,
-  type CommandConfig,
-  type CommandInteraction,
-  CommandOption,
-} from "@dressed/dressed";
-import { getMineCount } from "../components/buttons/sweep_:x_:y.ts";
+import { ActionRow, Button, type CommandConfig, type CommandInteraction, CommandOption } from "@dressed/dressed";
+import { getMineCount } from "../components/buttons/sweep.ts";
 
 const kv = await Deno.openKv();
 
-export const config: CommandConfig = {
+export const config = {
   description: "Play a game of minesweeper",
   options: [
     CommandOption({
@@ -22,15 +16,12 @@ export const config: CommandConfig = {
       ],
     }),
   ],
-};
+} satisfies CommandConfig;
 
-export default async function minesweeper(interaction: CommandInteraction) {
-  await interaction.deferReply({
-    ephemeral: true,
-  });
+export default async function minesweeper(interaction: CommandInteraction<typeof config>) {
+  await interaction.deferReply({ ephemeral: true });
 
   const difficulty = interaction.getOption("difficulty")?.string() ?? "medium";
-
   const mines = generateMines(difficulty);
 
   await kv.atomic().set(["sweeper", interaction.user.id], mines).commit();
@@ -61,8 +52,8 @@ export default async function minesweeper(interaction: CommandInteraction) {
               emoji: { name: "❔" },
               custom_id: `sweep_${x}_${y}`,
             });
-          })
-      )
+          }),
+      ),
     );
 
   await interaction.editReply({

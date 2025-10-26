@@ -1,10 +1,11 @@
 import { Button, type MessageComponentInteraction } from "@dressed/dressed";
+import type { Params } from "@dressed/matcher";
+
 const kv = await Deno.openKv();
 
-export default async function sweep(
-  interaction: MessageComponentInteraction,
-  { x, y }: Record<string, string>
-) {
+export const pattern = "sweep_:x_:y";
+
+export default async function sweep(interaction: MessageComponentInteraction, { x, y }: Params<typeof pattern>) {
   const minesPos = (await kv.get(["sweeper", interaction.user.id])).value as number[];
 
   const mines = getMineCount(minesPos, Number(x), Number(y));

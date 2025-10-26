@@ -2,15 +2,12 @@ import type { CommandInteraction } from "@dressed/react";
 import type { CommandConfig } from "dressed";
 import db, { getUser } from "@/db";
 
-export const config: CommandConfig = {
+export const config = {
   description: "Register yourself in the economy system",
-};
+} satisfies CommandConfig;
 
 export default async function register(interaction: CommandInteraction) {
-  const [user] = await Promise.all([
-    getUser(interaction.user.id),
-    interaction.deferReply({ ephemeral: true }),
-  ]);
+  const [user] = await Promise.all([getUser(interaction.user.id), interaction.deferReply({ ephemeral: true })]);
 
   if (user) {
     return interaction.editReply("You are already registered!");

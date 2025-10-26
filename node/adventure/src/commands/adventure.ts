@@ -1,13 +1,10 @@
-import type { CommandConfig, CommandInteraction, MessageComponentInteraction } from "dressed";
-import avtButton from "@/components/buttons/avt-:choice-:vars";
+import type { CommandConfig, MessageComponentInteraction } from "dressed";
+import avtButton from "@/components/buttons/adventure-button";
 
-export const config: CommandConfig = {
+export const config = {
   description: "Start a new adventure!",
-};
+} satisfies CommandConfig;
 
-export default function adventure(interaction: CommandInteraction) {
-  return avtButton(interaction as unknown as MessageComponentInteraction, {
-    choice: "start",
-    vars: "{}",
-  });
+export default function adventure(interaction: MessageComponentInteraction) {
+  return avtButton(interaction, { choice: "start", vars: "{}" });
 }

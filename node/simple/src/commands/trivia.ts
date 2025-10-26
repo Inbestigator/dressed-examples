@@ -1,8 +1,8 @@
 import { ActionRow, Button, type CommandConfig, type CommandInteraction } from "dressed";
 
-export const config: CommandConfig = {
+export const config = {
   description: "Gives a random trivia question",
-};
+} satisfies CommandConfig;
 
 export default async function trivia(interaction: CommandInteraction) {
   const [res] = await Promise.all([
@@ -15,14 +15,7 @@ export default async function trivia(interaction: CommandInteraction) {
     correctAnswer: string;
   };
   const answers = incorrectAnswers.concat(correctAnswer);
-  const buttons = answers
-    .map((label, i) =>
-      Button({
-        label,
-        custom_id: `guess-${i}`,
-      })
-    )
-    .sort(() => Math.random() - 0.5);
+  const buttons = answers.map((label, i) => Button({ label, custom_id: `guess-${i}` })).sort(() => Math.random() - 0.5);
 
   await interaction.editReply({
     content: `## Trivia!\n${question.text}`,

@@ -6,6 +6,7 @@
     "start": "deno -A --unstable-kv .dressed"
   },
   "imports": {
-    "@dressed/dressed": "jsr:@dressed/dressed@^1.9.1"
+    "@dressed/dressed": "jsr:@dressed/dressed@^1.10.0",
+    "@dressed/matcher": "npm:@dressed/matcher@^1.4.0"
   }
 }

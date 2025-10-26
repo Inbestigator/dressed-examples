@@ -2,7 +2,7 @@
 
 Examples for Dressed, the serverless Discord bot framework.
 
-[Dressed repo](https://github.com/inbestigator/dressed)
-[Dressed site](https://dressed.vercel.app/)
+[Dressed repo](https://github.com/Inbestigator/dressed)
+[Dressed site](https://dressed.js.org/)
 
-Install using [the cli library](https://jsr.io/@dressed/cmd).
+Install with the `dressed create` command

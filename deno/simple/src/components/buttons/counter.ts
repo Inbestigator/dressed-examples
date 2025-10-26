@@ -1,10 +1,14 @@
 import type { MessageComponentInteraction } from "@dressed/dressed";
+import type { Params } from "@dressed/matcher";
 import { showCount } from "../../commands/counter.ts";
+
 const kv = await Deno.openKv();
+
+export const pattern = ":action(add|reset)_counter";
 
 export default async function counterAction(
   interaction: MessageComponentInteraction,
-  { action }: { action: "add" | "reset" },
+  { action }: Params<typeof pattern>,
 ) {
   if (action === "reset") {
     await kv.atomic().delete(["counter"]).commit();

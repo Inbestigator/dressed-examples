@@ -1,8 +1,8 @@
 import type { CommandConfig, CommandInteraction } from "dressed";
 
-export const config: CommandConfig = {
+export const config = {
   description: "Returns a greeting",
-};
+} satisfies CommandConfig;
 
 export default async function greet(interaction: CommandInteraction) {
   await interaction.reply({

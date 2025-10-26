@@ -1,18 +1,11 @@
 "use client";
 
-import { useState } from "react";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import { Check, Pencil, Trash, X } from "lucide-react";
-import { User } from "@/types";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import type { User } from "@/types";
 
 interface UsersTableProps {
   users: User[];
@@ -27,10 +20,10 @@ export function UsersTable({ users, updateUserBalance, deleteUser }: UsersTableP
 
   async function saveEdit() {
     if (editingId !== null) {
-      const newBalance = Number.parseInt(editValue);
+      const newBalance = Number.parseInt(editValue, 10);
       setIsActionInProgress(true);
       setEditingId(null);
-      if (!isNaN(newBalance) && newBalance >= 0) {
+      if (!Number.isNaN(newBalance) && newBalance >= 0) {
         await updateUserBalance(editingId, newBalance);
       }
       setIsActionInProgress(false);
@@ -48,13 +41,11 @@ export function UsersTable({ users, updateUserBalance, deleteUser }: UsersTableP
 
   function formatDate(date: Date | null) {
     if (!date) return "Never";
-    return new Date(date)
-      .toLocaleDateString("en-US", { month: "long", day: "2-digit" })
-      .replace(/\//g, "/");
+    return new Date(date).toLocaleDateString("en-US", { month: "long", day: "2-digit" }).replace(/\//g, "/");
   }
 
   return (
-    <div className="bg-white rounded-lg border shadow-sm">
+    <div className="rounded-lg border bg-white shadow-sm">
       <Table>
         <TableHeader>
           <TableRow>
@@ -64,19 +55,19 @@ export function UsersTable({ users, updateUserBalance, deleteUser }: UsersTableP
             <TableHead className="w-[100px]"></TableHead>
           </TableRow>
         </TableHeader>
-        <TableBody className={isActionInProgress ? "opacity-50 pointer-events-none" : ""}>
+        <TableBody className={isActionInProgress ? "pointer-events-none opacity-50" : ""}>
           {users.map((user) => (
             <TableRow key={user.id}>
               <TableCell>
                 <div className="font-medium">{user.discord_username}</div>
-                <div className="text-xs text-muted-foreground">{user.discord_id}</div>
+                <div className="text-muted-foreground text-xs">{user.discord_id}</div>
               </TableCell>
               <TableCell>
                 {editingId === user.id ? (
                   <Input
                     value={editValue}
                     onChange={(e) => setEditValue(e.target.value)}
-                    className="w-24 h-8"
+                    className="h-8 w-24"
                     type="number"
                     min="0"
                   />
@@ -84,7 +75,7 @@ export function UsersTable({ users, updateUserBalance, deleteUser }: UsersTableP
                   <span className="font-medium">{user.balance}</span>
                 )}
               </TableCell>
-              <TableCell className="hidden md:table-cell text-muted-foreground text-sm">
+              <TableCell className="hidden text-muted-foreground text-sm md:table-cell">
                 {formatDate(user.last_daily_reward)}
               </TableCell>
               <TableCell>
@@ -117,12 +108,7 @@ export function UsersTable({ users, updateUserBalance, deleteUser }: UsersTableP
                     >
                       <Pencil className="h-4 w-4" />
                     </Button>
-                    <Button
-                      size="icon"
-                      variant="ghost"
-                      onClick={() => handleDeleteUser(user.id)}
-                      className="h-8 w-8"
-                    >
+                    <Button size="icon" variant="ghost" onClick={() => handleDeleteUser(user.id)} className="h-8 w-8">
                       <Trash className="h-4 w-4" />
                     </Button>
                   </div>

@@ -1,3 +1,3 @@
 export default {
-    reactStrictMode: true,
+  reactStrictMode: true,
 };

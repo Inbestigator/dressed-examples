@@ -1,14 +1,8 @@
-import {
-  ActionRow,
-  Button,
-  type CommandConfig,
-  type CommandInteraction,
-} from "@dressed/dressed";
+import { ActionRow, Button, type CommandConfig, type CommandInteraction } from "@dressed/dressed";
+
 const kv = await Deno.openKv();
 
-export const config: CommandConfig = {
-  description: "Increments a counter",
-};
+export const config = { description: "Increments a counter" } satisfies CommandConfig;
 
 export default async function counter(interaction: CommandInteraction) {
   await kv.atomic().sum(["counter"], 1n).commit();
@@ -35,5 +29,5 @@ export default async function counter(interaction: CommandInteraction) {
 }
 
 export function showCount(count: unknown) {
-  return `I've been run ${count} time${count == 1 ? "" : "s"}!`;
+  return `I've been run ${count} time${Number(count) === 1 ? "" : "s"}!`;
 }

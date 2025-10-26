@@ -6,9 +6,9 @@
     "start": "bun .dressed"
   },
   "devDependencies": {
-    "@types/node": "^24.2.1"
+    "@types/node": "^24.9.1"
   },
   "dependencies": {
-    "dressed": "^1.9.1"
+    "dressed": "^1.10.0"
   }
 }

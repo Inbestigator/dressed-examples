@@ -1,7 +1,7 @@
-# Simple (non-Deno) Bot
+# Simple Bot
 
 This is a version of the simple example bot made with
-[Dressed](https://dressed.vercel.app) that is compatible with Node,
+[Dressed](https://dressed.js.org) that is compatible with Node,
 Bun, and Deno.
 
 ## Commands
@@ -39,12 +39,7 @@ You can try editing your bot by modifying `src/commands/greet.ts`.
 
 ## Deploying
 
-When you're ready, you can try to deploy the bot with Deno deploy:
-
-```sh
-bun run build
-deployctl deploy --entrypoint=.dressed/index.mjs
-```
+When you're ready, you can try to deploying the bot. See [the deploying guides](https://dressed.js.org/docs/guide/deploying) for more information.
 
 You can check out
 [the GitHub repository](https://github.com/inbestigator/dressed) - your feedback

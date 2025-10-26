@@ -1,12 +1,12 @@
 import { type CommandInteraction, Container, TextDisplay } from "@dressed/react";
 import type { CommandConfig } from "dressed";
 import { Fragment } from "react";
-import { User } from "@/types";
 import db from "@/db";
+import type { User } from "@/types";
 
-export const config: CommandConfig = {
+export const config = {
   description: "Get the top 3 richest users",
-};
+} satisfies CommandConfig;
 
 export default async function register(interaction: CommandInteraction) {
   const [{ rows: users }] = await Promise.all([
@@ -19,12 +19,12 @@ export default async function register(interaction: CommandInteraction) {
       ## 🏆 Leaderboard
       <TextDisplay>
         {(users as unknown as User[]).map((user, i) => (
-          <Fragment key={i}>
+          <Fragment key={user.id}>
             {i + 1}. {user.discord_username} - ${user.balance}
             {"\n"}
           </Fragment>
         ))}
       </TextDisplay>
-    </Container>
+    </Container>,
   );
 }

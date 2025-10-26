@@ -1,6 +1,6 @@
 # Simple Bot
 
-This is a simple example bot made with [Dressed](https://dressed.vercel.app).
+This is a simple example bot made with [Dressed](https://dressed.js.org).
 
 ## Commands
 
@@ -50,12 +50,7 @@ You can try editing your bot by modifying `src/commands/shop.ts`.
 
 ## Deploying
 
-When you're ready, you can deploy the bot with Deno deploy:
-
-```sh
-deno task build
-deployctl deploy --entrypoint=.dressed
-```
+When you're ready, you can try to deploying the bot. See [the deploying guides](https://dressed.js.org/docs/guide/deploying) for more information. This bot works especially well on [Deno Deploy](https://dressed.js.org/docs/guide/deploying/deno-deploy).
 
 You can check out
 [the GitHub repository](https://github.com/inbestigator/dressed) - your feedback

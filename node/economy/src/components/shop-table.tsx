@@ -1,16 +1,8 @@
 "use client";
 
+import { Pencil, Plus, Trash } from "lucide-react";
 import { useState } from "react";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import {
   Dialog,
   DialogContent,
@@ -20,10 +12,11 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Pencil, Trash, Plus } from "lucide-react";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import type { Item } from "@/types";
 import { ShopPreview } from "./shop-preview";
-import { Item } from "@/types";
 
 interface ShopTableProps {
   items: Item[];
@@ -73,7 +66,7 @@ export function ShopTable({ items, addItem, updateItem, deleteItem }: ShopTableP
 
   return (
     <div>
-      <div className="flex justify-end mb-4">
+      <div className="mb-4 flex justify-end">
         <Dialog open={isAddDialogOpen} onOpenChange={setIsAddDialogOpen}>
           <DialogTrigger asChild>
             <Button variant="outline" size="sm">
@@ -92,7 +85,7 @@ export function ShopTable({ items, addItem, updateItem, deleteItem }: ShopTableP
                   Name
                 </Label>
                 <Input
-                  id="name"
+                  id={"name"}
                   value={newItem.name}
                   onChange={(e) => setNewItem({ ...newItem, name: e.target.value })}
                   className="col-span-3"
@@ -103,7 +96,7 @@ export function ShopTable({ items, addItem, updateItem, deleteItem }: ShopTableP
                   Emoji
                 </Label>
                 <Input
-                  id="emoji"
+                  id={"emoji"}
                   value={newItem.emoji}
                   onChange={(e) => setNewItem({ ...newItem, emoji: e.target.value })}
                   className="col-span-3"
@@ -115,13 +108,11 @@ export function ShopTable({ items, addItem, updateItem, deleteItem }: ShopTableP
                   Price
                 </Label>
                 <Input
-                  id="price"
+                  id={"price"}
                   type="number"
                   min="0"
                   value={newItem.price}
-                  onChange={(e) =>
-                    setNewItem({ ...newItem, price: Number.parseInt(e.target.value) || 0 })
-                  }
+                  onChange={(e) => setNewItem({ ...newItem, price: Number.parseInt(e.target.value, 10) || 0 })}
                   className="col-span-3"
                 />
               </div>
@@ -133,7 +124,7 @@ export function ShopTable({ items, addItem, updateItem, deleteItem }: ShopTableP
         </Dialog>
       </div>
 
-      <div className="bg-white rounded-lg border shadow-sm mb-6">
+      <div className="mb-6 rounded-lg border bg-white shadow-sm">
         <Table>
           <TableHeader>
             <TableRow>
@@ -143,7 +134,7 @@ export function ShopTable({ items, addItem, updateItem, deleteItem }: ShopTableP
               <TableHead className="w-[100px]"></TableHead>
             </TableRow>
           </TableHeader>
-          <TableBody className={isActionInProgress ? "opacity-50 pointer-events-none" : ""}>
+          <TableBody className={isActionInProgress ? "pointer-events-none opacity-50" : ""}>
             {items.map((item) => (
               <TableRow key={item.id}>
                 <TableCell className="text-xl">{item.emoji}</TableCell>
@@ -175,11 +166,9 @@ export function ShopTable({ items, addItem, updateItem, deleteItem }: ShopTableP
                                 Name
                               </Label>
                               <Input
-                                id="edit-name"
+                                id={"edit-name"}
                                 value={editingItem.name}
-                                onChange={(e) =>
-                                  setEditingItem({ ...editingItem, name: e.target.value })
-                                }
+                                onChange={(e) => setEditingItem({ ...editingItem, name: e.target.value })}
                                 className="col-span-3"
                               />
                             </div>
@@ -188,11 +177,9 @@ export function ShopTable({ items, addItem, updateItem, deleteItem }: ShopTableP
                                 Emoji
                               </Label>
                               <Input
-                                id="edit-emoji"
+                                id={"edit-emoji"}
                                 value={editingItem.emoji}
-                                onChange={(e) =>
-                                  setEditingItem({ ...editingItem, emoji: e.target.value })
-                                }
+                                onChange={(e) => setEditingItem({ ...editingItem, emoji: e.target.value })}
                                 className="col-span-3"
                                 maxLength={2}
                               />
@@ -202,14 +189,14 @@ export function ShopTable({ items, addItem, updateItem, deleteItem }: ShopTableP
                                 Price
                               </Label>
                               <Input
-                                id="edit-price"
+                                id={"edit-price"}
                                 type="number"
                                 min="0"
                                 value={editingItem.price}
                                 onChange={(e) =>
                                   setEditingItem({
                                     ...editingItem,
-                                    price: Number.parseInt(e.target.value) || 0,
+                                    price: Number.parseInt(e.target.value, 10) || 0,
                                   })
                                 }
                                 className="col-span-3"
@@ -222,12 +209,7 @@ export function ShopTable({ items, addItem, updateItem, deleteItem }: ShopTableP
                         </DialogFooter>
                       </DialogContent>
                     </Dialog>
-                    <Button
-                      size="icon"
-                      variant="ghost"
-                      onClick={() => handleDeleteItem(item.id)}
-                      className="h-8 w-8"
-                    >
+                    <Button size="icon" variant="ghost" onClick={() => handleDeleteItem(item.id)} className="h-8 w-8">
                       <Trash className="h-4 w-4" />
                     </Button>
                   </div>

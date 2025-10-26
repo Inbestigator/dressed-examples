@@ -1,17 +1,14 @@
-import { Container, TextDisplay, type CommandInteraction } from "@dressed/react";
+import { type CommandInteraction, Container, TextDisplay } from "@dressed/react";
 import type { CommandConfig } from "dressed";
 import db, { getUser } from "@/db.ts";
-import { UserItem } from "@/types";
+import type { UserItem } from "@/types";
 
-export const config: CommandConfig = {
+export const config = {
   description: "View your balance and items",
-};
+} satisfies CommandConfig;
 
 export default async function balance(interaction: CommandInteraction) {
-  const [user] = await Promise.all([
-    getUser(interaction.user.id),
-    interaction.deferReply({ ephemeral: true }),
-  ]);
+  const [user] = await Promise.all([getUser(interaction.user.id), interaction.deferReply({ ephemeral: true })]);
 
   if (!user) {
     return interaction.editReply("You aren't registered!");
@@ -32,6 +29,6 @@ export default async function balance(interaction: CommandInteraction) {
       <TextDisplay>### Balance:</TextDisplay>${user.balance.toLocaleString()}
       <TextDisplay>### Items:</TextDisplay>
       {userItems.map((item) => `${item.quantity}x ${item.item_name}`).join("\n")}
-    </Container>
+    </Container>,
   );
 }

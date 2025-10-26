@@ -1,4 +1,4 @@
-import { Item } from "@/types";
+import type { Item } from "@/types";
 
 interface ShopPreviewProps {
   items: Item[];
@@ -11,19 +11,19 @@ export function ShopPreview({ items }: ShopPreviewProps) {
   }
 
   return (
-    <div className="hidden md:block bg-[#2D2F34] text-white p-4 rounded-md shadow-md">
-      <div className="flex items-center gap-2 mb-4">
+    <div className="hidden rounded-md bg-[#2D2F34] p-4 text-white shadow-md md:block">
+      <div className="mb-4 flex items-center gap-2">
         <div className="text-2xl">🛍️</div>
-        <div className="text-xl font-semibold">Shop</div>
+        <div className="font-semibold text-xl">Shop</div>
       </div>
 
       <div className="space-y-2">
         {itemRows.map((row, rowIndex) => (
-          <div key={rowIndex} className="flex gap-2">
+          <div key={rowIndex.toString()} className="flex gap-2">
             {row.map((item) => (
               <div
                 key={item.id}
-                className="bg-[#5865F2] text-white px-3 py-1.5 rounded-md flex items-center justify-center gap-1.5 text-sm"
+                className="flex items-center justify-center gap-1.5 rounded-md bg-[#5865F2] px-3 py-1.5 text-sm text-white"
               >
                 <span>{item.emoji}</span>
                 <span>

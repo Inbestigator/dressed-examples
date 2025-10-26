@@ -2,22 +2,16 @@ import type { CommandInteraction } from "@dressed/react";
 import type { CommandConfig } from "dressed";
 import db, { getUser } from "@/db";
 
-export const config: CommandConfig = {
+export const config = {
   description: "Claim your daily reward",
-};
+} satisfies CommandConfig;
 
 export default async function balance(interaction: CommandInteraction) {
-  const [user] = await Promise.all([
-    getUser(interaction.user.id),
-    interaction.deferReply({ ephemeral: true }),
-  ]);
+  const [user] = await Promise.all([getUser(interaction.user.id), interaction.deferReply({ ephemeral: true })]);
 
   if (!user) {
     return interaction.editReply("You aren't registered!");
-  } else if (
-    user.last_daily_reward &&
-    Date.now() - new Date(user.last_daily_reward).getTime() < 86400000
-  ) {
+  } else if (user.last_daily_reward && Date.now() - new Date(user.last_daily_reward).getTime() < 86400000) {
     return interaction.editReply("You have already claimed your daily reward!");
   }
 

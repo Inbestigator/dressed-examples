@@ -1,28 +1,18 @@
-import {
-  ActionRow,
-  Button,
-  type CommandConfig,
-  type CommandInteraction,
-} from "@dressed/dressed";
+import { ActionRow, Button, type CommandConfig, type CommandInteraction } from "@dressed/dressed";
+
 const kv = await Deno.openKv();
 
-export const config: CommandConfig = {
-  description: "Gives a random trivia question",
-};
+export const config = { description: "Gives a random trivia question" } satisfies CommandConfig;
 
 export default async function trivia(interaction: CommandInteraction) {
-  await interaction.deferReply({
-    ephemeral: true,
-  });
+  await interaction.deferReply({ ephemeral: true });
   const res = await fetch("https://the-trivia-api.com/v2/questions?limit=1");
 
   const question = (await res.json())[0];
 
   await kv.atomic().set(["trivia", interaction.user.id], question).commit();
 
-  const answers = deduplicate(
-    question.incorrectAnswers.concat(question.correctAnswer),
-  );
+  const answers = deduplicate(question.incorrectAnswers.concat(question.correctAnswer));
 
   const buttons = answers
     .sort(() => Math.random() - 0.5)
@@ -30,12 +20,11 @@ export default async function trivia(interaction: CommandInteraction) {
       Button({
         label: answer,
         custom_id: `guess_${answer.toLowerCase().replace(/[^a-z]/g, "_")}`,
-      })
+      }),
     );
 
   await interaction.editReply({
-    content:
-      `## Trivia!\n${question.question.text}\n-# Difficulty: ${question.difficulty}`,
+    content: `## Trivia!\n${question.question.text}\n-# Difficulty: ${question.difficulty}`,
     components: [ActionRow(...buttons)],
   });
 }
