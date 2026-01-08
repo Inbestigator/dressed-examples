@@ -4,7 +4,8 @@ This bot is intended as an example of the functionality for
 [Dressed](https://dressed.js.org). Users can register, check their balance,
 claim daily rewards, view the shop, and buy items.
 
-This bot has an admin dashboard made using Next.js, where you can moderate user balances and shop items.
+This bot has an admin dashboard made using Next.js, where you can moderate user
+balances and shop items.
 
 ## Commands
 
@@ -55,7 +56,10 @@ You can try editing your bot by modifying `src/bot/commands/shop.ts`.
 
 ## Deploying
 
-When you're ready, you can try to deploying the bot. See [the deploying guides](https://dressed.js.org/docs/guide/deploying) for more information. This bot works especially well on [Vercel](https://dressed.js.org/docs/guide/deploying/vercel).
+When you're ready, you can try to deploying the bot. See
+[the deploying guides](https://dressed.js.org/docs/guide/deploying) for more
+information. This bot works especially well on
+[Vercel](https://dressed.js.org/docs/guide/deploying/vercel).
 
 You can check out
 [the GitHub repository](https://github.com/inbestigator/dressed) - your feedback
