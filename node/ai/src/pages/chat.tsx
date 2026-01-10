@@ -56,9 +56,10 @@ export function ChatPage({
           accessory={
             <Button
               onClick={(i) => {
-                const { custom_id } = registerHandler((i: ModalSubmitInteraction) => {
-                  return sendMessage(i.getField("text", true).textInput());
-                });
+                const { custom_id } = registerHandler(
+                  `${i.data.custom_id}:modal`,
+                  (i: ModalSubmitInteraction) => sendMessage(i.getField("text", true).textInput())
+                );
                 return i.showModal(
                   <Label label="Content">
                     <TextInput custom_id="text" max_length={80} />

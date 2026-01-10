@@ -12,11 +12,7 @@ export function useChat(initial?: string) {
     async (text: string, role: "user" | "system" = "user") => {
       setIsGenerating(true);
       try {
-        const userMessage: UIMessage = {
-          id: randomUUID(),
-          role,
-          parts: [{ type: "text", text }],
-        };
+        const userMessage: UIMessage = { id: randomUUID(), role, parts: [{ type: "text", text }] };
 
         setMessages((p) => [...p, userMessage, { id: randomUUID(), role: "assistant", parts: [] }]);
 
