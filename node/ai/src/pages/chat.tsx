@@ -57,7 +57,7 @@ export function ChatPage({
             <Button
               onClick={(i) => {
                 const { custom_id } = registerHandler(
-                  `${i.data.custom_id}:modal`,
+                  `${i.data.custom_id.split("-")[2]}:modal`,
                   (i: ModalSubmitInteraction) => sendMessage(i.getField("text", true).textInput())
                 );
                 return i.showModal(
