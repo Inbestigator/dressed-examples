@@ -14,7 +14,7 @@ and choose their own branching story.
 1. Clone the project:
 
    ```sh
-   bunx dressed create my-bot node/adventure
+   bun create dressed my-bot adventure
    ```
 
 2. Install dependencies:

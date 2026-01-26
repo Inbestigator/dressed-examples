@@ -1,0 +1,16 @@
+{
+  "name": "blank-bot",
+  "scripts": {
+    "dev": "bun run build -i && bun start",
+    "register": "bun run build -r && bun start",
+    "build": "dressed build",
+    "start": "bun .dressed"
+  },
+  "devDependencies": {
+    "@dressed/framework": "^0.2.0",
+    "@types/node": "^25.0.10"
+  },
+  "dependencies": {
+    "dressed": "^2.0.0-canary.1"
+  }
+}

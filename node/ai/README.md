@@ -15,7 +15,7 @@ By default it uses [Groq](https://groq.com) as the AI provider, but you can easi
 1. Clone the project:
 
    ```sh
-   bunx dressed create my-bot node/ai
+   bun create dressed my-bot ai
    ```
 
 2. Install dependencies:

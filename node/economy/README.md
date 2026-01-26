@@ -20,7 +20,7 @@ balances and shop items.
 1. Clone the project:
 
    ```sh
-   bunx dressed create my-bot node/economy
+   bun create dressed my-bot economy
    ```
 
 2. Install dependencies:

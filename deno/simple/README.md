@@ -14,7 +14,7 @@ This is a simple example bot made with [Dressed](https://dressed.js.org).
 1. Clone the project:
 
    ```sh
-   deno -A npm:dressed create my-bot deno/simple
+   deno -A npm:create-dressed my-bot deno/simple
    ```
 
 2. Install dependencies:

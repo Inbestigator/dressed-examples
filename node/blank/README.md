@@ -1,21 +1,19 @@
-# Simple Bot
+# Blank Bot
 
-This is a version of the simple example bot made with
-[Dressed](https://dressed.js.org) that is compatible with Node,
-Bun, and Deno.
+This is a blank template bot made with
+[Dressed](https://dressed.js.org) using [@dressed/framework](https://npmjs.com/@dressed/framework) that is compatible with Node, Bun, and Deno.
 
 ## Commands
 
-- `/counter`: Increments a counter.
-- `/greet`: Returns a greeting.
-- `/trivia`: Gives a random trivia question.
+- `/ping`: Checks the API latency.
 
 ## Setup
 
 1. Clone the project:
 
    ```sh
-   bun create dressed my-bot simple
+   bun create dressed my-bot blank
+   cd my-bot
    ```
 
 2. Install dependencies:
@@ -35,7 +33,7 @@ system
 
 If you aren't using VSCode, Cloudflared tunnel is a good option.
 
-You can try editing your bot by modifying `src/commands/greet.ts`.
+You can try editing your bot by modifying `src/commands/ping.ts`.
 
 ## Deploying
 
