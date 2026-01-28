@@ -7,10 +7,10 @@
     "start": "bun .dressed"
   },
   "devDependencies": {
-    "@dressed/framework": "^0.2.0",
+    "@dressed/framework": "^0.3.0",
     "@types/node": "^25.0.10"
   },
   "dependencies": {
-    "dressed": "^2.0.0-canary.1"
+    "dressed": "^2.0.0-rc.1"
   }
 }

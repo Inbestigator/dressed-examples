@@ -3,7 +3,7 @@
     "fmt": "bun --bun biome check --write"
   },
   "dependencies": {
-    "@biomejs/biome": "^2.3.11"
+    "@biomejs/biome": "^2.3.13"
   },
   "workspaces": [
     "node/*"

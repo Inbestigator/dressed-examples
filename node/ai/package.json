@@ -7,14 +7,14 @@
     "start": "bun .dressed"
   },
   "dependencies": {
-    "@ai-sdk/groq": "^3.0.4",
+    "@ai-sdk/groq": "^3.0.16",
     "@dressed/react": "^1.8.4",
-    "ai": "^6.0.27",
-    "dressed": "^1.10.2-rc.1",
-    "react": "^19.2.3"
+    "ai": "^6.0.57",
+    "dressed": "^1.10.2-rc.2",
+    "react": "^19.2.4"
   },
   "devDependencies": {
-    "@types/node": "^25.0.6",
-    "@types/react": "^19.2.8"
+    "@types/node": "^25.0.10",
+    "@types/react": "^19.2.10"
   }
 }
