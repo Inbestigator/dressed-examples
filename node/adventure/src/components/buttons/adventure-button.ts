@@ -2,24 +2,21 @@ import type { Params } from "@dressed/matcher";
 import { ActionRow, Button, type MessageComponentInteraction } from "dressed";
 import { story } from "@/story.ts";
 
-function random(min: number, max: number) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
 export const pattern = "avt-:choice-:vars";
 
 export default function avtButton(interaction: MessageComponentInteraction, args: Params<typeof pattern>) {
   if (interaction.message) interaction.reply = interaction.update;
-  let storyPoint = story[args.choice as keyof typeof story];
 
+  let storyPoint = { ...story[args.choice as keyof typeof story] };
   const vars: Record<string, string> = JSON.parse(args.vars);
+
   if (storyPoint.conditions?.length) {
     for (const condition of storyPoint.conditions) {
       if (
         Object.entries(condition.if).some(([key, value]) => {
           if (/\d\/\d/.test(key)) {
-            const [min, max] = key.split("/").map(Number);
-            return random(min ?? 0, max ?? 0) === parseInt(value, 10);
+            const [min = 0, max = 0] = key.split("/").map(Number);
+            return Math.floor(Math.random() * (max - min + 1)) + min === Number.parseInt(value, 10);
           }
           return vars[key] !== value;
         })
@@ -30,7 +27,7 @@ export default function avtButton(interaction: MessageComponentInteraction, args
           ...storyPoint,
           ...condition.node,
           choices: (storyPoint.choices ?? []).concat(condition.node.choices ?? []),
-          set: { ...(storyPoint.set ?? {}), ...(condition.node.set ?? {}) },
+          set: { ...storyPoint.set, ...condition.node.set },
         };
       } else storyPoint = { ...storyPoint, ...condition.node };
 
@@ -51,13 +48,15 @@ export default function avtButton(interaction: MessageComponentInteraction, args
     storyPoint.text = `## Too bad!\n${storyPoint.text}`;
     storyPoint.choices = undefined;
   }
+
   storyPoint.text = storyPoint.text.replaceAll(/{{ (.+?) }}/g, (_, k) => vars[k] ?? "");
+
   if (!storyPoint.choices) {
     return interaction.reply({ content: storyPoint.text, ephemeral: true, components: [] });
   }
+
   return interaction.reply({
     content: storyPoint.text,
-    ephemeral: true,
     components: [
       ActionRow(
         ...storyPoint.choices.map((choice) =>
@@ -69,5 +68,6 @@ export default function avtButton(interaction: MessageComponentInteraction, args
         ),
       ),
     ],
+    ephemeral: true,
   });
 }

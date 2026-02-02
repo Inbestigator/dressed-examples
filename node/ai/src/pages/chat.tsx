@@ -1,11 +1,4 @@
-import {
-  Button,
-  Label,
-  type ModalSubmitInteraction,
-  Section,
-  TextDisplay,
-  TextInput,
-} from "@dressed/react";
+import { Button, Label, type ModalSubmitInteraction, Section, TextDisplay, TextInput } from "@dressed/react";
 import { registerHandler } from "@dressed/react/callbacks";
 import { Fragment, type PropsWithChildren } from "react";
 import { useChat } from "../hooks/use-chat";
@@ -48,7 +41,7 @@ export function ChatPage({
                 <Fragment key={`${m.id}-${i}`}>{p.type === "text" && p.text}</Fragment>
               ))}
             </TextDisplay>
-          )
+          ),
         )}
       {messages.length < firstIndex + 1 && prompt.empty}
       {showPrompt && (
@@ -58,7 +51,7 @@ export function ChatPage({
               onClick={(i) => {
                 const { custom_id } = registerHandler(
                   `${i.data.custom_id.split("-")[2]}:modal`,
-                  (i: ModalSubmitInteraction) => sendMessage(i.getField("text", true).textInput())
+                  (i: ModalSubmitInteraction) => sendMessage(i.getField("text", true).textInput()),
                 );
                 return i.showModal(
                   <Label label="Content">
@@ -67,7 +60,7 @@ export function ChatPage({
                   {
                     custom_id,
                     title: (messages.length > firstIndex ? defaultPrompt : prompt).modal,
-                  }
+                  },
                 );
               }}
               label={(messages.length > firstIndex ? defaultPrompt : prompt).label}

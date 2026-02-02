@@ -7,8 +7,7 @@ export const config = {
 } satisfies CommandConfig;
 
 export default function chatCommand(interaction: CommandInteraction) {
-  return interaction.reply(
-    <ChatPage prompt={{ label: "Send a message", modal: "Send a message" }} />,
-    { ephemeral: true }
-  );
+  return interaction.reply(<ChatPage prompt={{ label: "Send a message", modal: "Send a message" }} />, {
+    ephemeral: true,
+  });
 }
