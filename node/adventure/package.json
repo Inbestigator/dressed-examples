@@ -11,6 +11,6 @@
     "typescript": "^5.9.3"
   },
   "dependencies": {
-    "dressed": "^1.10.0"
+    "dressed": "^2.0.0-canary.2"
   }
 }
