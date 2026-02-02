@@ -6,11 +6,11 @@
     "build": "dressed build",
     "start": "bun .dressed"
   },
-  "devDependencies": {
-    "@dressed/framework": "^0.3.0",
-    "@types/node": "^25.0.10"
-  },
   "dependencies": {
     "dressed": "^2.0.0-rc.1"
+  },
+  "devDependencies": {
+    "@dressed/framework": "^0.4.0",
+    "@types/node": "^25.2.0"
   }
 }

@@ -37,7 +37,7 @@ export function useChat(initial?: string) {
         setIsGenerating(false);
       }
     },
-    [messages]
+    [messages],
   );
 
   useEffect(() => {
