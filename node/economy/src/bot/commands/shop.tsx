@@ -6,7 +6,7 @@ export const config = {
   description: "View the shop",
 } satisfies CommandConfig;
 
-export default async function shop(interaction: CommandInteraction) {
+export default async function (interaction: CommandInteraction) {
   const [shopItems] = await Promise.all([getItems(), interaction.deferReply({ ephemeral: true })]);
   return interaction.editReply(
     <Container>

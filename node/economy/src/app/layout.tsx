@@ -6,7 +6,7 @@ export const metadata = {
   description: "This is an example of a Discord bot made using Dressed, it's deployed on Vercel and runs in Next.js",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
       <body className="min-h-dvh">

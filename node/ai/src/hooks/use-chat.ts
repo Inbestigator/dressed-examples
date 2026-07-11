@@ -37,7 +37,7 @@ export function useChat(initial?: string) {
         setIsGenerating(false);
       }
     },
-    [messages]
+    [messages],
   );
 
   useEffect(() => {
@@ -69,7 +69,7 @@ function trimMessages(messages: UIMessage[]) {
 
     const removed = trimmed.splice(idx, 1)[0];
 
-    if (removed.role === "assistant") {
+    if (removed?.role === "assistant") {
       for (const p of removed.parts) {
         if (p.type === "text") assistantChars -= p.text.length;
       }

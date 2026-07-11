@@ -1,0 +1,14 @@
+{
+  "name": "bare-bot",
+  "scripts": {
+    "dev": "bun --watch .",
+    "register": "REGISTER=yes bun .",
+    "start": "bun ."
+  },
+  "dependencies": {
+    "dressed": "^2.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^26.1.1"
+  }
+}

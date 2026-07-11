@@ -1,20 +1,21 @@
 {
   "name": "ai-bot",
   "scripts": {
-    "dev": "bun run build -i && bun start",
+    "build": "bun --bun dressed build",
+    "dev": "bun --hot dev.ts",
     "register": "bun run build -r && bun start",
-    "build": "dressed build",
     "start": "bun .dressed"
   },
   "dependencies": {
-    "@ai-sdk/groq": "^3.0.16",
-    "@dressed/react": "^1.8.4",
-    "ai": "^6.0.57",
-    "dressed": "^1.10.2-rc.2",
-    "react": "^19.2.4"
+    "@ai-sdk/groq": "^4.0.7",
+    "@dressed/react": "^2.0.0",
+    "ai": "^7.0.22",
+    "dressed": "^2.0.0",
+    "react": "^19.2.7"
   },
   "devDependencies": {
-    "@types/node": "^25.0.10",
-    "@types/react": "^19.2.10"
+    "@dressed/framework": "^0.6.0",
+    "@types/node": "^26.1.1",
+    "@types/react": "^19.2.17"
   }
 }

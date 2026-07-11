@@ -5,7 +5,7 @@ export const config = {
   description: "Increments a counter",
 } satisfies CommandConfig;
 
-export default async function counter(interaction: CommandInteraction) {
+export default async function (interaction: CommandInteraction) {
   await interaction.reply({
     components: countDisplay(1),
     ephemeral: true,
@@ -17,15 +17,8 @@ export function countDisplay(count: number) {
   return [
     TextDisplay(`Current count: ${count}`),
     ActionRow(
-      Button({
-        label: "Add",
-        custom_id: `set-counter-${count + 1}`,
-      }),
-      Button({
-        label: "Reset",
-        style: "Danger",
-        custom_id: "set-counter-0",
-      }),
+      Button({ custom_id: `set-counter-${count + 1}`, label: "Add" }),
+      Button({ custom_id: "set-counter-0", label: "Reset", style: "Danger" }),
     ),
   ];
 }
