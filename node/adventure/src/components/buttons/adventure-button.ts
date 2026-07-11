@@ -1,10 +1,10 @@
 import type { Params } from "@dressed/matcher";
-import { ActionRow, Button, type MessageComponentInteraction } from "dressed";
+import { ActionRow, Button, type ComponentInteraction } from "dressed";
 import { story } from "@/story.ts";
 
 export const pattern = "avt-:choice-:vars";
 
-export default function avtButton(interaction: MessageComponentInteraction, args: Params<typeof pattern>) {
+export default function avtButton(interaction: ComponentInteraction, args: Params<typeof pattern>) {
   if (interaction.message) interaction.reply = interaction.update;
 
   let storyPoint = { ...story[args.choice as keyof typeof story] };

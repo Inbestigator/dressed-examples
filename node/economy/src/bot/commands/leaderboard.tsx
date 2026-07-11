@@ -8,7 +8,7 @@ export const config = {
   description: "Get the top 3 richest users",
 } satisfies CommandConfig;
 
-export default async function register(interaction: CommandInteraction) {
+export default async function (interaction: CommandInteraction) {
   const [{ rows: users }] = await Promise.all([
     db.execute("SELECT * FROM users ORDER BY balance DESC LIMIT 3"),
     interaction.deferReply({ ephemeral: true }),

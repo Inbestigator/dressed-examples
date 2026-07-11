@@ -1,12 +1,10 @@
+import type { DressedConfig } from "@dressed/framework";
 import { patchInteraction } from "@dressed/react";
-import type { ServerConfig } from "dressed/server";
 
-const config: ServerConfig = {
-  build: { root: "src/bot", extensions: ["tsx", "ts"] },
-  middleware: {
-    commands: (i) => [patchInteraction(i)],
-    components: (i, a) => [patchInteraction(i), a],
+export default {
+  build: { root: "src/bot", include: ["**/*.{ts,tsx}"] },
+  hooks: {
+    onBeforeCommand: (i) => [patchInteraction(i)],
+    onBeforeComponent: (i, ...p) => [patchInteraction(i), ...p],
   },
-};
-
-export default config;
+} satisfies DressedConfig;

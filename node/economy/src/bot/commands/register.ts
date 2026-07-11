@@ -6,7 +6,7 @@ export const config = {
   description: "Register yourself in the economy system",
 } satisfies CommandConfig;
 
-export default async function register(interaction: CommandInteraction) {
+export default async function (interaction: CommandInteraction) {
   const [user] = await Promise.all([getUser(interaction.user.id), interaction.deferReply({ ephemeral: true })]);
 
   if (user) {

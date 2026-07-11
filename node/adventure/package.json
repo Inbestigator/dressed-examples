@@ -1,17 +1,16 @@
 {
   "name": "adventure-bot",
   "scripts": {
+    "build": "dressed build",
     "dev": "bun run build -i && bun start",
     "register": "bun run build -r && bun start",
-    "build": "dressed build",
     "start": "bun .dressed"
   },
-  "devDependencies": {
-    "@dressed/framework": "^0.5.0",
-    "@types/node": "^25.2.0",
-    "typescript": "^5.9.3"
-  },
   "dependencies": {
-    "dressed": "^2.0.0-canary.3"
+    "dressed": "^2.0.0"
+  },
+  "devDependencies": {
+    "@dressed/framework": "^0.6.0",
+    "@types/node": "^26.1.1"
   }
 }

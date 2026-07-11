@@ -1,11 +1,11 @@
-import { ActionRow, type MessageComponentInteraction } from "@dressed/dressed";
+import { ActionRow, type ComponentInteraction } from "@dressed/dressed";
 import type { Params } from "@dressed/matcher";
 
 const kv = await Deno.openKv();
 
 export const pattern = "guess_:answer";
 
-export default async function guess(interaction: MessageComponentInteraction, { answer }: Params<typeof pattern>) {
+export default async function guess(interaction: ComponentInteraction, { answer }: Params<typeof pattern>) {
   const question = (await kv.get(["trivia", interaction.user.id])).value as {
     correctAnswer: string;
   };

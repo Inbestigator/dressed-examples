@@ -1,9 +1,9 @@
-import { Button, Label, type ModalSubmitInteraction, Section, TextDisplay, TextInput } from "@dressed/react";
+import { Button, Label, type ModalInteraction, Section, TextDisplay, TextInput } from "@dressed/react";
 import { registerHandler } from "@dressed/react/callbacks";
 import { Fragment, type PropsWithChildren } from "react";
 import { useChat } from "../hooks/use-chat";
 
-function EmptySection({ children }: PropsWithChildren) {
+function EmptySection({ children }: Readonly<PropsWithChildren>) {
   return <Section accessory={children}>‎</Section>;
 }
 
@@ -12,10 +12,10 @@ const defaultPrompt = { label: "Reply", modal: "Reply to message", empty: "‎" 
 export function ChatPage({
   initial,
   prompt = defaultPrompt,
-}: {
+}: Readonly<{
   initial?: string;
   prompt?: { label: string; modal: string; empty?: string };
-}) {
+}>) {
   const { isGenerating, messages, sendMessage } = useChat(initial);
   const firstIndex = Number(!!initial);
   const showPrompt = messages.at(-1)?.parts.length || messages.length < firstIndex + 1;
@@ -30,7 +30,7 @@ export function ChatPage({
             <EmptySection key={m.id}>
               <Button
                 custom_id={m.id}
-                label={m.parts[0].type === "text" ? m.parts[0].text : "..."}
+                label={m.parts[0]?.type === "text" ? m.parts[0].text : "..."}
                 style="Secondary"
                 disabled
               />
@@ -51,7 +51,7 @@ export function ChatPage({
               onClick={(i) => {
                 const { custom_id } = registerHandler(
                   `${i.data.custom_id.split("-")[2]}:modal`,
-                  (i: ModalSubmitInteraction) => sendMessage(i.getField("text", true).textInput()),
+                  (i: ModalInteraction) => sendMessage(i.getField("text", true).textInput()),
                 );
                 return i.showModal(
                   <Label label="Content">

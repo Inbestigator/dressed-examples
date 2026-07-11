@@ -6,7 +6,7 @@ export const config = {
   type: "Message",
 } satisfies CommandConfig;
 
-export default function summarizeCommand(interaction: CommandInteraction<typeof config>) {
+export default function (interaction: CommandInteraction<typeof config>) {
   if (!interaction.target.content) {
     return interaction.reply("Nothing to summarize!", { ephemeral: true });
   }
